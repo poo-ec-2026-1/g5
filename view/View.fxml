@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="application.controller.ViewController">
+   <center>
+      <BorderPane prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: #F8F9FA;" BorderPane.alignment="CENTER">
+         <top>
+            <HBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="500.0" style="-fx-background-color: #2D6A4F; -fx-padding: 5;" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView id="hamburguer" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#toggleMenu" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/images/menuhamburguer.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/images/librarylogo1.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label text="TradeLibrary" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Regular" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </top>
+         <left>
+            <VBox fx:id="menuLateral" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #2D6A4F; -fx-padding: 20;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: white; -fx-padding: 5;" text="Teste" />
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <top>
+                  <Label alignment="TOP_CENTER" text="Teste" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <BorderPane.margin>
+                        <Insets top="20.0" />
+                     </BorderPane.margin>
+                  </Label>
+               </top>
+               <center>
+                  <Button mnemonicParsing="false" style="-fx-background-color: #2D6A4F;" text="Teste" textFill="WHITE" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>
