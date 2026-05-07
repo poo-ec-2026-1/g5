@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="200.0" spacing="10.0" styleClass="surface" stylesheets="@application.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="120.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/images/livroGenerico.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label text="Nome do Livro" wrapText="true">
+               <styleClass>
+                  <String fx:value="title-2" />
+               </styleClass>
+            </Label>
+            <Label text="Autor do Livro" wrapText="true">
+               <styleClass>
+                  <String fx:value="text-muted" />
+               </styleClass>
+            </Label>
+            <Label text="Vendedor: Nome" wrapText="true">
+               <styleClass>
+                  <String fx:value="text-muted" />
+               </styleClass>
+            </Label>
+            <Label text="R$ 50,00 ou Troca" textFill="#2d6a4f" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Button mnemonicParsing="false" prefWidth="180.0" styleClass="btn-primary" text="Ver Mais">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

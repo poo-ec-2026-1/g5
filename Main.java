@@ -15,11 +15,13 @@ public class Main extends Application {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/View.fxml"));
 			loader.setClassLoader(Main.class.getClassLoader());
 			BorderPane root = (BorderPane) loader.load();
-			Scene scene = new Scene(root,500,500);
+			Scene scene = new Scene(root,1050,850);
 			scene.getStylesheets().add(getClass().getResource("/view/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			
-			primaryStage.setResizable(false); // travar o tamanho da janela
+			primaryStage.setMinWidth(800); // limite minimo largura
+			primaryStage.setMinHeight(850); // limite minimo altura
+			primaryStage.setResizable(true); // permitir maximizar e redimensionar
 			primaryStage.setTitle("TradeLibrary - Troca e Venda de Livros Usados");
 			
 			Image icone = new Image(getClass().getResourceAsStream("/resources/images/librarylogo1.png"));
