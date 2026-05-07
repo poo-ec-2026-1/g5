@@ -46,13 +46,6 @@ Copie de: C:\caminho-para-seu-sdk\javafx-sdk-26\bin\*.dll
    ```
 3. Para `TestePublicavel` e `TesteMarketplace` não é necessário nenhuma configuração extra.
 
-### BlueJ
-1. Abra o projeto pela pasta `g5/`
-2. Vá em **Ferramentas → Preferências → Bibliotecas**
-3. Adicione todos os `.jar` da pasta `lib/` do projeto
-4. Reinicie o BlueJ
-5. Clique com o botão direito na classe desejada e escolha **void main()**
-
 ---
 
 ## Estrutura do projeto
