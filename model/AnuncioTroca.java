@@ -1,6 +1,6 @@
-package application.model;
+package model;
 
-public class AnuncioTroca extends Anuncio{
+public class AnuncioTroca extends Anuncio implements Publicavel{
     private String procura;
     
     public AnuncioTroca(Livro livro, Usuario vendedor, String procura, String descricao) {
@@ -33,6 +33,11 @@ public class AnuncioTroca extends Anuncio{
            this.status = "Disponivel";
            System.out.println("Status trocado de Trocado para Disponivel");
         }
+    }
+    
+    @Override
+    public void publicar(){
+        System.out.println("Publicando anúncio de TROCA: " + this.livro.getTitulo() + " por " + this.procura);
     }
 
     public Livro getLivro() { return livro; }

@@ -1,6 +1,6 @@
-package application.model;
+package model;
 
-public class AnuncioVenda extends Anuncio{
+public class AnuncioVenda extends Anuncio implements Publicavel {
     
     public AnuncioVenda(Livro livro, Usuario vendedor, double preco, String descricao) {
         this.livro = livro;
@@ -31,6 +31,11 @@ public class AnuncioVenda extends Anuncio{
            this.status = "Disponivel";
            System.out.println("Status trocado de Vendido para Disponivel");
         }
+    }
+    
+    @Override
+    public void publicar(){
+        System.out.println("Publicando anúncio de VENDA: " + this.livro.getTitulo() + " por R$ " + this.preco);
     }
 
     public Livro getLivro() { return livro; }

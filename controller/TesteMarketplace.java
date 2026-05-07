@@ -1,6 +1,6 @@
-package application.controller;
+package controller;
 
-import application.model.*;
+import model.*;
 
 public class TesteMarketplace {
     public static void main(String[] args) {
