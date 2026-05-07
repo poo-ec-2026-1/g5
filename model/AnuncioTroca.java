@@ -37,7 +37,7 @@ public class AnuncioTroca extends Anuncio implements Publicavel{
     
     @Override
     public void publicar(){
-        System.out.println("Publicando anúncio de TROCA: " + this.livro.getTitulo() + " por " + this.procura);
+        System.out.println("Publicando anuncio de TROCA: " + this.livro.getTitulo() + " por " + this.procura);
     }
 
     public Livro getLivro() { return livro; }

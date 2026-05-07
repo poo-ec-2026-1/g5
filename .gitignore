@@ -1,24 +1,22 @@
-# Compiled class file
+# Compiled class files
 *.class
-
-# Log file
-*.log
-
-# BlueJ files
 *.ctxt
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Log files
+*.log
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# Virtual machine crash logs
 hs_err_pid*
 replay_pid*
+
+# Build output
+bin/
+
+# BlueJ project files (gerados automaticamente pela IDE)
+package.bluej
+
+# DLLs nativas (específicas do SO de cada dev, não devem ir no repositório)
+lib/*.dll
+
+# Arquivos pessoais do Eclipse que não precisam de versionamento
+.settings/

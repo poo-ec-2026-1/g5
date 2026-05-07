@@ -35,7 +35,7 @@ public class AnuncioVenda extends Anuncio implements Publicavel {
     
     @Override
     public void publicar(){
-        System.out.println("Publicando anúncio de VENDA: " + this.livro.getTitulo() + " por R$ " + this.preco);
+        System.out.println("Publicando anuncio de VENDA: " + this.livro.getTitulo() + " por R$ " + this.preco);
     }
 
     public Livro getLivro() { return livro; }

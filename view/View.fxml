@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="application.controller.ViewController">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="controller.ViewController">
    <center>
       <BorderPane prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: #F8F9FA;" BorderPane.alignment="CENTER">
          <top>
