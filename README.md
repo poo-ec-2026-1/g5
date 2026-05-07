@@ -1,5 +1,10 @@
 # TradeLibrary - Troca e Venda de Livros Usados
 
+<p align="center">
+  <img src="resources/images/librarylogo1.png" alt="TradeLibrary Logo" width="200">
+</p>
+
+
 ## Pré-requisitos
 
 - **JDK 25 ou superior** — recomendado: [Eclipse Temurin](https://adoptium.net/)
