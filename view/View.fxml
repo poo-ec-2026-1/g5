@@ -25,39 +25,66 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="70.0" fitWidth="70.0" onMouseClicked="#navToHome" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/images/librarylogo1.png" />
                      </image>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
-                  <Label text="TradeLibrary" textFill="WHITE">
+                  <Label onMouseClicked="#navToHome" text="TradeLibrary" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Label>
                </children>
             </HBox>
          </top>
          <left>
-            <VBox fx:id="menuLateral" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #1B4332; -fx-padding: 20 0 0 0;" BorderPane.alignment="CENTER">
+            <VBox fx:id="menuLateral" prefHeight="200.0" prefWidth="220.0" style="-fx-background-color: #1B4332; -fx-padding: 20 0 0 0;" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onAction="#navToHome" prefHeight="40.0" prefWidth="200.0" styleClass="btn-menu" text="Início">
+                  <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#navToHome" prefHeight="40.0" prefWidth="220.0" styleClass="btn-menu" text="Início">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/images/menuInicio.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#navToCatalog" prefHeight="40.0" prefWidth="200.0" styleClass="btn-menu" text="Catálogo">
+                  <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#navToCatalog" prefHeight="40.0" prefWidth="220.0" styleClass="btn-menu" text="Catálogo">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/images/menuCatalogo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#navToAddBook" prefHeight="40.0" prefWidth="200.0" styleClass="btn-menu" text="Cadastrar Livro">
+                  <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#navToAddBook" prefHeight="40.0" prefWidth="220.0" styleClass="btn-menu" text="Cadastrar Livro">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/images/menuCadastrarLivro.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
             </VBox>
