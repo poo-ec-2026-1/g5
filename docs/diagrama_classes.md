@@ -1,4 +1,4 @@
-### Código do PlantUML do Diagrama de Classes
+### Código PlantUML do Diagrama de Classes
 ```
 @startuml
 skinparam classAttributeIconSize 0
