@@ -1,11 +1,12 @@
+```mermaid
 classDiagram
     class Publicavel {
-        &lt;&lt;interface&gt;&gt;
+        <<interface>>
         +publicar() void
     }
 
     class Anuncio {
-        &lt;&lt;abstract&gt;&gt;
+        <<abstract>>
         #preco : double
         #status : String
         #descricao : String
@@ -47,13 +48,13 @@ classDiagram
         +Livro(titulo: String, autor: String, isbn: String, estado: String)
         +info() String
     }
-    
+
     Anuncio o-- Usuario : possui vendedor
     Anuncio o-- Livro : possui livro
-    
-    Anuncio &lt;|-- AnuncioVenda
-    Anuncio &lt;|-- AnuncioTroca
-    
-    Publicavel &lt;|.. AnuncioVenda
-    Publicavel &lt;|.. AnuncioTroca
-    
+
+    Anuncio <|-- AnuncioVenda
+    Anuncio <|-- AnuncioTroca
+
+    Publicavel <|.. AnuncioVenda
+    Publicavel <|.. AnuncioTroca
+```
