@@ -107,3 +107,19 @@
     -fx-scale-x: 0.90;
     -fx-scale-y: 0.90;
 }
+
+/* ===== CUSTOM INPUT CONTAINER ===== */
+.input-container {
+    -fx-background-color: white;
+    -fx-border-color: #CED4DA;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 8 12 8 12;
+    -fx-alignment: center-left;
+}
+
+.input-container-error {
+    -fx-border-color: #DC3545;
+    -fx-border-width: 2;
+    -fx-padding: 7 11 7 11;
+}

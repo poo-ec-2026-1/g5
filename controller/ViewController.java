@@ -3,8 +3,10 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import model.Usuario;
 
 import java.io.IOException;
 
@@ -16,13 +18,37 @@ public class ViewController {
 	private BorderPane contentArea;
 
 	@FXML
+	private Label lblUsuarioLogado;
+
+	@FXML
 	public void initialize() {
 	    // Começa escondido e sem ocupar espaço no layout
 	    menuLateral.setVisible(false);
 	    menuLateral.setManaged(false);
 	    
+	    // Exibe o usuário logado
+	    if (lblUsuarioLogado != null) {
+	        Usuario logado = SessionManager.getInstance().getUsuarioLogado();
+	        if (logado != null) {
+	            lblUsuarioLogado.setText(logado.getNome());
+	        }
+	    }
+	    
 	    // Carrega a tela inicial por padrão
 	    navToHome();
+	}
+
+	@FXML
+	private void handleLogout() {
+	    SessionManager.getInstance().logout();
+	    try {
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
+	        loader.setClassLoader(getClass().getClassLoader());
+	        Parent loginRoot = loader.load();
+	        lblUsuarioLogado.getScene().setRoot(loginRoot);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 	
 	@FXML
