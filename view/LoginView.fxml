@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" prefHeight="850.0" prefWidth="1050.0" styleClass="bg-default" stylesheets="@application.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<GridPane alignment="CENTER" prefHeight="850.0" prefWidth="1050.0" style="-fx-background-color: #0C0F19;" styleClass="bg-default" stylesheets="@application.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
       <HBox alignment="CENTER" prefHeight="600.0" prefWidth="850.0" style="-fx-background-radius: 12; -fx-overflow: hidden;" styleClass="surface">
          <children>
