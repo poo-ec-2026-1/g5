@@ -19,29 +19,29 @@
       </ImageView>
       <VBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label text="Nome do Livro" wrapText="true">
+            <Label fx:id="lblNomeLivro" text="Nome do Livro" wrapText="true">
                <styleClass>
                   <String fx:value="title-2" />
                </styleClass>
             </Label>
-            <Label text="Autor do Livro" wrapText="true">
+            <Label fx:id="lblAutorLivro" text="Autor do Livro" wrapText="true">
                <styleClass>
                   <String fx:value="text-muted" />
                </styleClass>
             </Label>
-            <Label text="Vendedor: Nome" wrapText="true">
+            <Label fx:id="lblNomeVendedor" text="Vendedor: Nome" wrapText="true">
                <styleClass>
                   <String fx:value="text-muted" />
                </styleClass>
             </Label>
-            <Label text="R$ 50,00 ou Troca" textFill="#2d6a4f" wrapText="true">
+            <Label fx:id="lblPrecoOuTroca" text="R$ 50,00 ou Troca" textFill="#2d6a4f" wrapText="true">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
          </children>
       </VBox>
-      <Button mnemonicParsing="false" prefWidth="180.0" styleClass="btn-primary" text="Ver Mais">
+      <Button mnemonicParsing="false" onAction="#handleVerMais" prefWidth="180.0" styleClass="btn-primary" text="Ver Mais">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

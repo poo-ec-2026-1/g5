@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
+import model.*;
 
 public class AddBookController {
 
@@ -69,14 +70,58 @@ public class AddBookController {
         boolean formValido = validarFormulario();
         
         if (formValido) {
-            // Aqui seria a integração com o back-end para salvar os dados
-            // Usando os modelos: Livro, AnuncioVenda, AnuncioTroca, etc.
-            
-            System.out.println("Formulário validado com sucesso! Pronto para salvar no Back-end.");
-            System.out.println("Título: " + txtTitulo.getText());
-            System.out.println("Autor: " + txtAutor.getText());
-            System.out.println("Tipo: " + (rbVenda.isSelected() ? "Venda" : "Troca"));
+            Usuario vendedor = SessionManager.getInstance().getUsuarioLogado();
+            if (vendedor == null) {
+                System.out.println("Erro: Nenhum usuário logado na sessão.");
+                return;
+            }
+
+            Livro livro = new Livro(
+                txtTitulo.getText().trim(),
+                txtAutor.getText().trim(),
+                txtIsbn.getText() != null ? txtIsbn.getText().trim() : "",
+                cmbEstado.getValue()
+            );
+
+            AnuncioRepository repo = new AnuncioRepository();
+            boolean salvo = false;
+
+            if (rbVenda.isSelected()) {
+                double preco = Double.parseDouble(txtPreco.getText().replace(",", "."));
+                AnuncioVenda anuncioVenda = new AnuncioVenda(
+                    livro,
+                    vendedor,
+                    preco,
+                    txtDescricao.getText() != null ? txtDescricao.getText().trim() : ""
+                );
+                salvo = repo.cadastrarAnuncioVenda(anuncioVenda);
+            } else {
+                AnuncioTroca anuncioTroca = new AnuncioTroca(
+                    livro,
+                    vendedor,
+                    txtProcura.getText().trim(),
+                    txtDescricao.getText() != null ? txtDescricao.getText().trim() : ""
+                );
+                salvo = repo.cadastrarAnuncioTroca(anuncioTroca);
+            }
+
+            if (salvo) {
+                System.out.println("Anúncio salvo com sucesso no banco de dados!");
+                limparCampos();
+            } else {
+                System.out.println("Erro ao salvar o anúncio no banco de dados.");
+            }
         }
+    }
+
+    private void limparCampos() {
+        txtTitulo.clear();
+        txtAutor.clear();
+        txtIsbn.clear();
+        txtPreco.clear();
+        txtProcura.clear();
+        txtDescricao.clear();
+        cmbEstado.getSelectionModel().selectFirst();
     }
     
     private boolean validarFormulario() {

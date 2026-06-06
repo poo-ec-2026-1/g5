@@ -1,8 +1,18 @@
 package model;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "anuncios_troca")
 public class AnuncioTroca extends Anuncio implements Publicavel{
+    @DatabaseField(columnName = "procura", canBeNull = false)
     private String procura;
     
+    // Construtor sem argumentos exigido pelo ORMLite
+    public AnuncioTroca() {
+        super();
+    }
+
     public AnuncioTroca(Livro livro, Usuario vendedor, String procura, String descricao) {
         this.livro = livro;
         this.vendedor = vendedor;

@@ -7,10 +7,17 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import model.Usuario;
+import model.Anuncio;
 
 import java.io.IOException;
 
 public class ViewController {
+	private static ViewController instance;
+
+	public static ViewController getInstance() {
+		return instance;
+	}
+
 	@FXML
 	private VBox menuLateral;
 	
@@ -22,6 +29,7 @@ public class ViewController {
 
 	@FXML
 	public void initialize() {
+		instance = this;
 	    // Começa escondido e sem ocupar espaço no layout
 	    menuLateral.setVisible(false);
 	    menuLateral.setManaged(false);
@@ -36,6 +44,25 @@ public class ViewController {
 	    
 	    // Carrega a tela inicial por padrão
 	    navToHome();
+	}
+
+	public void mostrarDetalhesLivro(Anuncio anuncio) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/BookDetailsView.fxml"));
+			BookDetailsController controller = new BookDetailsController(anuncio);
+			loader.setController(controller);
+			Parent view = loader.load();
+
+			// Limpa todas as regiões do BorderPane
+			contentArea.setTop(null);
+			contentArea.setBottom(null);
+			contentArea.setLeft(null);
+			contentArea.setRight(null);
+
+			contentArea.setCenter(view);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -68,7 +95,7 @@ public class ViewController {
 	}
 	
 	@FXML
-	private void navToCatalog() {
+	public void navToCatalog() {
 	    loadView("/view/CatalogView.fxml");
 	}
 	

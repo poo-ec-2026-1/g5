@@ -4,8 +4,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.FlowPane;
+import model.Anuncio;
+import model.AnuncioRepository;
 
 import java.io.IOException;
+import java.util.List;
 
 public class CatalogController {
 
@@ -14,17 +17,19 @@ public class CatalogController {
 
     @FXML
     public void initialize() {
-        // Como não estamos usando mocks com dados dinâmicos reais agora,
-        // vamos apenas carregar alguns cards estáticos para demonstrar o visual
-        // responsivo do FlowPane
-        for (int i = 0; i < 6; i++) {
-            carregarCard();
+        AnuncioRepository repo = new AnuncioRepository();
+        List<Anuncio> anuncios = repo.listarTodos();
+        
+        for (Anuncio anuncio : anuncios) {
+            carregarCard(anuncio);
         }
     }
 
-    private void carregarCard() {
+    private void carregarCard(Anuncio anuncio) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/BookCard.fxml"));
+            BookCardController cardController = new BookCardController(anuncio);
+            loader.setController(cardController);
             Parent card = loader.load();
             cardsContainer.getChildren().add(card);
         } catch (IOException e) {

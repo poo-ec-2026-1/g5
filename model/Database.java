@@ -14,6 +14,10 @@ public class Database {
             connectionSource = new JdbcConnectionSource(DB_URL);
             // Cria a tabela de usuários se ela não existir
             TableUtils.createTableIfNotExists(connectionSource, Usuario.class);
+            // Cria as tabelas de livros e anúncios
+            TableUtils.createTableIfNotExists(connectionSource, Livro.class);
+            TableUtils.createTableIfNotExists(connectionSource, AnuncioVenda.class);
+            TableUtils.createTableIfNotExists(connectionSource, AnuncioTroca.class);
         }
         return connectionSource;
     }
