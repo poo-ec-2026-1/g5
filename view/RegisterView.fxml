@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="CENTER" prefHeight="850.0" prefWidth="1050.0" style="-fx-background-color: #0C0F19;" styleClass="bg-default" stylesheets="@application.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="700.0" prefWidth="900.0" style="-fx-background-radius: 12; -fx-overflow: hidden;" styleClass="surface">
+         <children>
+            <!-- Left Side: Brand Panel -->
+            <VBox alignment="CENTER" prefWidth="400.0" spacing="20.0" style="-fx-background-color: #1B4332; -fx-background-radius: 12 0 0 12;" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/images/librarylogo1.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Criar Conta" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" text="Junte-se à nossa comunidade de leitores e comece a trocar ou vender seus livros." textFill="#D8F3DC" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+               </padding>
+            </VBox>
+            <!-- Right Side: Register Form -->
+            <VBox alignment="CENTER_LEFT" prefWidth="500.0" spacing="12.0" style="-fx-background-color: white; -fx-background-radius: 0 12 12 0;">
+               <children>
+                  <VBox spacing="3.0">
+                     <children>
+                        <Label text="Cadastro">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                        </Label>
+                        <Label text="Preencha os campos abaixo para criar sua conta." textFill="#6C757D">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  
+                  <VBox spacing="8.0">
+                     <children>
+                        <!-- Name Field -->
+                        <VBox spacing="2.0">
+                           <children>
+                              <Label style="-fx-font-weight: bold;" text="Nome Completo *" />
+                              <HBox fx:id="containerNome" alignment="CENTER_LEFT" spacing="10.0" styleClass="input-container">
+                                 <children>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/images/usuarioIcone2.png" />
+                                       </image>
+                                    </ImageView>
+                                    <TextField fx:id="txtNome" promptText="Seu nome completo" style="-fx-background-color: transparent; -fx-padding: 0;" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <Label fx:id="lblErroNome" managed="false" styleClass="error-text" text="O nome é obrigatório." textFill="RED" visible="false" />
+                           </children>
+                        </VBox>
+                        
+                        <!-- Email Field -->
+                        <VBox spacing="2.0">
+                           <children>
+                              <Label style="-fx-font-weight: bold;" text="E-mail *" />
+                              <HBox fx:id="containerEmail" alignment="CENTER_LEFT" spacing="10.0" styleClass="input-container">
+                                 <children>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/images/emailIcone.png" />
+                                       </image>
+                                    </ImageView>
+                                    <TextField fx:id="txtEmail" promptText="Ex: leitor@email.com" style="-fx-background-color: transparent; -fx-padding: 0;" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <Label fx:id="lblErroEmail" managed="false" styleClass="error-text" text="E-mail inválido ou já cadastrado." textFill="RED" visible="false" />
+                           </children>
+                        </VBox>
+                        
+                        <!-- Phone Field -->
+                        <VBox spacing="2.0">
+                           <children>
+                              <Label style="-fx-font-weight: bold;" text="Telefone *" />
+                              <HBox fx:id="containerFone" alignment="CENTER_LEFT" spacing="10.0" styleClass="input-container">
+                                 <children>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/images/telefoneIcone.png" />
+                                       </image>
+                                    </ImageView>
+                                    <TextField fx:id="txtFone" promptText="Ex: (00) 00000-0000" style="-fx-background-color: transparent; -fx-padding: 0;" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <Label fx:id="lblErroFone" managed="false" styleClass="error-text" text="Telefone inválido." textFill="RED" visible="false" />
+                           </children>
+                        </VBox>
+                        
+                        <!-- Password Field -->
+                        <VBox spacing="2.0">
+                           <children>
+                              <Label style="-fx-font-weight: bold;" text="Senha *" />
+                              <HBox fx:id="containerSenha" alignment="CENTER_LEFT" spacing="10.0" styleClass="input-container">
+                                 <children>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/images/senhaIcone.png" />
+                                       </image>
+                                    </ImageView>
+                                    <PasswordField fx:id="txtSenha" promptText="Mínimo 6 caracteres" style="-fx-background-color: transparent; -fx-padding: 0;" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <Label fx:id="lblErroSenha" managed="false" styleClass="error-text" text="A senha deve ter pelo menos 6 caracteres." textFill="RED" visible="false" />
+                           </children>
+                        </VBox>
+                        
+                        <!-- Confirm Password Field -->
+                        <VBox spacing="2.0">
+                           <children>
+                              <Label style="-fx-font-weight: bold;" text="Confirmar Senha *" />
+                              <HBox fx:id="containerConfirmarSenha" alignment="CENTER_LEFT" spacing="10.0" styleClass="input-container">
+                                 <children>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/images/senhaIcone.png" />
+                                       </image>
+                                    </ImageView>
+                                    <PasswordField fx:id="txtConfirmarSenha" promptText="Confirme sua senha" style="-fx-background-color: transparent; -fx-padding: 0;" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <Label fx:id="lblErroConfirmarSenha" managed="false" styleClass="error-text" text="As senhas não coincidem." textFill="RED" visible="false" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  
+                  <Label fx:id="lblErroGeral" managed="false" styleClass="error-text" text="Preencha todos os campos obrigatórios corretamente." textFill="RED" visible="false" />
+                  
+                  <Button fx:id="btnCadastrar" mnemonicParsing="false" onAction="#handleRegister" prefHeight="45.0" prefWidth="500.0" styleClass="btn-primary" text="Cadastrar">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  
+                  <HBox alignment="CENTER" spacing="5.0">
+                     <children>
+                        <Label text="Já tem uma conta?" textFill="#6C757D" />
+                        <Button mnemonicParsing="false" onAction="#navToLogin" style="-fx-background-color: transparent; -fx-text-fill: #2D6A4F; -fx-font-weight: bold; -fx-padding: 0; -fx-cursor: hand;" text="Faça Login" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+</GridPane>

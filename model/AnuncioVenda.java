@@ -1,7 +1,15 @@
 package model;
 
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "anuncios_venda")
 public class AnuncioVenda extends Anuncio implements Publicavel {
     
+    // Construtor sem argumentos exigido pelo ORMLite
+    public AnuncioVenda() {
+        super();
+    }
+
     public AnuncioVenda(Livro livro, Usuario vendedor, double preco, String descricao) {
         this.livro = livro;
         this.vendedor = vendedor;

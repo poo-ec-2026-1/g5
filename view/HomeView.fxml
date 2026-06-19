@@ -21,7 +21,7 @@
          <children>
             <VBox spacing="10.0">
                <children>
-                  <Label style="-fx-font-size: 32px; -fx-font-weight: bold;" text="Olá, leitor! Bem-vindo ao TradeLibrary 📖" wrapText="true">
+                  <Label style="-fx-font-size: 32px; -fx-font-weight: bold;" text="Olá, leitor! Bem-vindo ao TradeLibrary" wrapText="true">
                      <font>
                         <Font name="System Bold" size="32.0" />
                      </font>
@@ -33,19 +33,16 @@
                <children>
                   <HBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
-                        <Label style="-fx-font-size: 18px;" text="🔄" />
                         <Label style="-fx-font-size: 18px;" text="Troque os livros que já leu por novas aventuras" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
-                        <Label style="-fx-font-size: 18px;" text="💰" />
                         <Label style="-fx-font-size: 18px;" text="Venda aquele exemplar parado na estante" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
-                        <Label style="-fx-font-size: 18px;" text="🔍" />
                         <Label style="-fx-font-size: 18px;" text="Descubra títulos no nosso catálogo" />
                      </children>
                   </HBox>

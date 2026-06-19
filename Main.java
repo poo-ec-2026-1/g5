@@ -1,20 +1,20 @@
  
 	
 import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/View.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
 			loader.setClassLoader(Main.class.getClassLoader());
-			BorderPane root = (BorderPane) loader.load();
+			Parent root = loader.load();
 			Scene scene = new Scene(root,1050,850);
 			scene.getStylesheets().add(getClass().getResource("/view/application.css").toExternalForm());
 			primaryStage.setScene(scene);
@@ -34,7 +34,14 @@ public class Main extends Application {
 		}
 	}
 	
+	@Override
+	public void stop() throws Exception {
+		model.Database.close();
+		super.stop();
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
 }
+

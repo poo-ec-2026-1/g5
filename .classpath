@@ -9,5 +9,10 @@
 	<classpathentry kind="lib" path="lib/javafx.media.jar"/>
 	<classpathentry kind="lib" path="lib/javafx.swing.jar"/>
 	<classpathentry kind="lib" path="lib/javafx.web.jar"/>
+	<classpathentry kind="lib" path="lib/ormlite-core-6.1.jar"/>
+	<classpathentry kind="lib" path="lib/ormlite-jdbc-6.1.jar"/>
+	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.45.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-2.0.12.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-simple-2.0.12.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
