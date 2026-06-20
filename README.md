@@ -1,13 +1,33 @@
 # TradeLibrary - Troca e Venda de Livros Usados
 
 <p align="center">
-  <img src="resources/images/librarylogo1.png" alt="TradeLibrary Logo" width="200">
+  <img src="resources/images/librarylogo1.png" alt="TradeLibrary Logo" width="180">
 </p>
 
+O **TradeLibrary** é um sistema desktop *Peer-to-Peer* (P2P) desenvolvido em Java e JavaFX para facilitar a compra, venda e troca de livros novos e usados. O projeto aplica conceitos sólidos de Programação Orientada a Objetos (POO), arquitetura MVC e persistência de dados local sem o uso de servidores externos.
+
+---
+
+## 📂 Estrutura de Pastas
+
+O projeto adota a arquitetura MVC (Model-View-Controller) para manter a separação de responsabilidades e facilitar a manutenção:
+
+```text
+g5/
+├── controller/         # Controladores JavaFX (Eventos e validações visuais)
+├── docs/               # Documentação técnica detalhada (ADRs, regras e guias)
+├── lib/                # Bibliotecas de dependência (JavaFX, ORMLite, SQLite)
+├── model/              # Classes de domínio, Repositórios e lógica de negócio em Java
+├── resources/          # Arquivos estáticos e logotipos do sistema
+├── view/               # Telas do sistema em FXML e estilização CSS
+├── .vscode/            # Configurações de execução e debug do VS Code
+├── Main.java           # Ponto de entrada (Entrypoint) da aplicação
+└── tradelibrary.db     # Banco de dados local SQLite (Autogerado)
+```
 
 ## Pré-requisitos
 
-- **JDK 25 ou superior** — recomendado: [Eclipse Temurin](https://adoptium.net/)
+- JDK 25 ou superior** — recomendado: [Eclipse Temurin](https://adoptium.net/)
 - **JavaFX SDK 26** — baixar em: [https://gluonhq.com/products/javafx/](https://gluonhq.com/products/javafx/)
 
 ## Configuração inicial (faça uma vez)
@@ -53,7 +73,7 @@ Copie de: C:\caminho-para-seu-sdk\javafx-sdk-26\bin\*.dll
 
 ---
 
-## Estrutura do projeto
+## 🏗️ Estrutura do Projeto
 
 ```
 g5/
@@ -65,5 +85,93 @@ g5/
 ├── Main.java           # Ponto de entrada da aplicação JavaFX
 └── .vscode/            # Configurações de execução para VS Code
 ```
-## Diagrama de Classes
+## 🏛️ Diagrama de Classes
+Abaixo está a representação estrutural do domínio principal do TradeLibrary, demonstrando a herança polimórfica dos anúncios.
+
+```mermaid
+classDiagram
+    class Usuario {
+        -String email
+        -String nome
+        -String fone
+        -String senha
+    }
+    
+    class Livro {
+        -int id
+        -String titulo
+        -String autor
+        -String estado
+        -String isbn
+    }
+    
+    class Anuncio {
+        <<abstract>>
+        #int id
+        #double preco
+        #String status
+        #String descricao
+        +taxaPlataforma()* double
+    }
+    
+    class AnuncioVenda {
+        +taxaPlataforma() double
+    }
+    
+    class AnuncioTroca {
+        -String procura
+        +taxaPlataforma() double
+    }
+
+    Anuncio <|-- AnuncioVenda
+    Anuncio <|-- AnuncioTroca
+    Anuncio --> "1" Livro : contém
+    Anuncio --> "1" Usuario : pertence a
+    Usuario "1" -- "0..*" Anuncio : publica
+```
+
 ![Diagrama de Classes](https://img.plantuml.biz/plantuml/png/pLHDImCn4BtdLmnwgTGMlPOYxL7m85QzpsPJ2MOpPPAKuiT_DvlzJAdeHV2qvCtCc_TcCravZ-n3POHxrNQ7Z1L8WywjlMTT1Azk9TcDVbDm9OIsNl4MfOBxK1WjSQyCl0k0AUmQW2SNi80zwL9y2e65yupIDvImji5AJQdY77Qi9CNaacAfIb0KuuEBs2Osjoy9AvMJ79bf34z17NIX-K6vKD7GiuvuFE2zGOzRuWfJh6yn1JJH0l8cTSh4PXgVbIsnjJQ69aRlcHPmLtykOHynLH8luCa5P1sXPAjhUJd8xzHV_8NyR_z0PkgHIJQcPb4coS2O3tMSznkdYQ9Z-2TUMtcjJKkL6dkSWQfGcnpQabNv85gIILq--4kbmx4kovrgksqSjbIzg3J4LfBNFXZA5M3mn3caNM6FbCVrA8_M815F6if1MQ8RZZNLo4MY-L5ujwndrsT0irdwThDTm8wS2xg_5N1pCh-ntMUd6nLJ-zpbHqmShzV9IBgEGeoUdEN7V9xNVHDiIrSn9xvnNm00)
+
+
+
+
+## 🔄 Fluxo de Caso de Uso: Troca de Livros
+
+```mermaid
+flowchart TD
+    Actor([Usuário Logado])
+    
+    subgraph View [Interface Gráfica]
+        UI1(Acessar tela 'Cadastrar Livro')
+        UI2(Preencher Dados do Livro)
+        UI3(Selecionar opção 'Troca')
+        UI4(Informar obra procurada)
+        UI5(Clicar em Salvar)
+    end
+    
+    subgraph Controller [Validação]
+        C1{Dados Inválidos?}
+        C2[Montar Objetos]
+    end
+    
+    subgraph Model [Lógica e Persistência]
+        M1[Instanciar Livro e AnuncioTroca]
+        M2[(SQLite: tradelibrary.db)]
+    end
+
+    %% Caminho Principal Encapsulado
+    Actor --> UI1
+    UI1 --> UI2 --> UI3 --> UI4 --> UI5 --> C1
+    
+    %% Tratamento de Erro (Retorno curto)
+    C1 -- Sim --> UI2
+    
+    %% Caminho Feliz
+    C1 -- Não --> C2
+    C2 --> M1
+    M1 -->|Persiste no Banco| M2
+    
+    %% Nó Final (Resolve o problema do achatamento)
+    EndNode([Sucesso: Retorna ao Catálogo])
+    M2 --> EndNode
+```
