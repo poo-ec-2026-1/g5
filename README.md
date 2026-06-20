@@ -73,105 +73,24 @@ Copie de: C:\caminho-para-seu-sdk\javafx-sdk-26\bin\*.dll
 
 ---
 
-## 🏗️ Estrutura do Projeto
 
-```
-g5/
-├── controller/         # Classes de controle (ViewController, Testes)
-├── model/              # Classes de domínio (Livro, Usuario, Anuncio...)
-├── view/               # Interface gráfica (View.fxml, application.css)
-├── resources/          # Recursos estáticos (imagens)
-├── lib/                # JARs do JavaFX (DLLs devem ser adicionadas localmente)
-├── Main.java           # Ponto de entrada da aplicação JavaFX
-└── .vscode/            # Configurações de execução para VS Code
-```
+
 ## 🏛️ Diagrama de Classes
 Abaixo está a representação estrutural do domínio principal do TradeLibrary, demonstrando a herança polimórfica dos anúncios.
 
-```mermaid
-classDiagram
-    class Usuario {
-        -String email
-        -String nome
-        -String fone
-        -String senha
-    }
-    
-    class Livro {
-        -int id
-        -String titulo
-        -String autor
-        -String estado
-        -String isbn
-    }
-    
-    class Anuncio {
-        <<abstract>>
-        #int id
-        #double preco
-        #String status
-        #String descricao
-        +taxaPlataforma()* double
-    }
-    
-    class AnuncioVenda {
-        +taxaPlataforma() double
-    }
-    
-    class AnuncioTroca {
-        -String procura
-        +taxaPlataforma() double
-    }
 
-    Anuncio <|-- AnuncioVenda
-    Anuncio <|-- AnuncioTroca
-    Anuncio --> "1" Livro : contém
-    Anuncio --> "1" Usuario : pertence a
-    Usuario "1" -- "0..*" Anuncio : publica
-```
+
+
+
 
 ![Diagrama de Classes](https://img.plantuml.biz/plantuml/png/pLHDImCn4BtdLmnwgTGMlPOYxL7m85QzpsPJ2MOpPPAKuiT_DvlzJAdeHV2qvCtCc_TcCravZ-n3POHxrNQ7Z1L8WywjlMTT1Azk9TcDVbDm9OIsNl4MfOBxK1WjSQyCl0k0AUmQW2SNi80zwL9y2e65yupIDvImji5AJQdY77Qi9CNaacAfIb0KuuEBs2Osjoy9AvMJ79bf34z17NIX-K6vKD7GiuvuFE2zGOzRuWfJh6yn1JJH0l8cTSh4PXgVbIsnjJQ69aRlcHPmLtykOHynLH8luCa5P1sXPAjhUJd8xzHV_8NyR_z0PkgHIJQcPb4coS2O3tMSznkdYQ9Z-2TUMtcjJKkL6dkSWQfGcnpQabNv85gIILq--4kbmx4kovrgksqSjbIzg3J4LfBNFXZA5M3mn3caNM6FbCVrA8_M815F6if1MQ8RZZNLo4MY-L5ujwndrsT0irdwThDTm8wS2xg_5N1pCh-ntMUd6nLJ-zpbHqmShzV9IBgEGeoUdEN7V9xNVHDiIrSn9xvnNm00)
 
 
+---
 
 
 ## 🔄 Fluxo de Caso de Uso: Troca de Livros
 
-```mermaid
-flowchart TD
-    Actor([Usuário Logado])
-    
-    subgraph View [Interface Gráfica]
-        UI1(Acessar tela 'Cadastrar Livro')
-        UI2(Preencher Dados do Livro)
-        UI3(Selecionar opção 'Troca')
-        UI4(Informar obra procurada)
-        UI5(Clicar em Salvar)
-    end
-    
-    subgraph Controller [Validação]
-        C1{Dados Inválidos?}
-        C2[Montar Objetos]
-    end
-    
-    subgraph Model [Lógica e Persistência]
-        M1[Instanciar Livro e AnuncioTroca]
-        M2[(SQLite: tradelibrary.db)]
-    end
+Este diagrama representa o fluxo principal de um usuário utilizando o sistema para cadastrar um interesse de troca.
 
-    %% Caminho Principal Encapsulado
-    Actor --> UI1
-    UI1 --> UI2 --> UI3 --> UI4 --> UI5 --> C1
-    
-    %% Tratamento de Erro (Retorno curto)
-    C1 -- Sim --> UI2
-    
-    %% Caminho Feliz
-    C1 -- Não --> C2
-    C2 --> M1
-    M1 -->|Persiste no Banco| M2
-    
-    %% Nó Final (Resolve o problema do achatamento)
-    EndNode([Sucesso: Retorna ao Catálogo])
-    M2 --> EndNode
-```
+![Fluxo de Troca](resources/images/casosdeuso.png)
