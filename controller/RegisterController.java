@@ -103,12 +103,13 @@ public class RegisterController {
         }
 
         if (valido) {
-            Usuario novoUsuario = new Usuario(nome, email, fone, senha);
+            String senhaCriptografada = SecurityUtils.hashSenha(senha);
+            Usuario novoUsuario = new Usuario(nome, email, fone, senhaCriptografada);
             boolean cadastrado = repository.cadastrar(novoUsuario);
 
             if (cadastrado) {
                 // Realiza o login automático
-                SessionManager.getInstance().login(email, senha);
+                SessionManager.getInstance().login(email, senhaCriptografada);
 
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/View.fxml"));
