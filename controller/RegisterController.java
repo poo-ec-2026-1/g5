@@ -109,7 +109,7 @@ public class RegisterController {
 
             if (cadastrado) {
                 // Realiza o login automático
-                SessionManager.getInstance().login(email, senhaCriptografada);
+                SessionManager.getInstance().login(email, senha);
 
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/View.fxml"));

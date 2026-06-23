@@ -30,7 +30,7 @@ public class AnuncioRepository {
                 Dao<Usuario, String> usuarioDao = DaoManager.createDao(Database.getConnectionSource(), Usuario.class);
                 Usuario demoUser = usuarioDao.queryForId("guilhermew@email.com");
                 if (demoUser == null) {
-                    demoUser = new Usuario("Guilherme William", "guilhermew@email.com", "(00) 00000-0000", "senha123");
+                    demoUser = new Usuario("Guilherme William", "guilhermew@email.com", "(00) 00000-0000", controller.SecurityUtils.hashSenha("senha123"));
                     usuarioDao.create(demoUser);
                 }
 
