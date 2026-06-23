@@ -20,7 +20,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#handleAdicionarAoCarrinho" style="-fx-background-color: -fx-secondary-color;" styleClass="btn-primary" text="🛒 Adicionar ao Carrinho">
+            <Button fx:id="btnAcao" mnemonicParsing="false" onAction="#handleAdicionarAoCarrinho" style="-fx-background-color: -fx-secondary-color;" styleClass="btn-primary" text="🛒 Adicionar ao Carrinho">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

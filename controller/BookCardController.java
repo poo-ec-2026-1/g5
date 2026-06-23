@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import model.Anuncio;
 import model.AnuncioVenda;
@@ -13,6 +14,7 @@ public class BookCardController {
     @FXML private Label lblAutorLivro;
     @FXML private Label lblNomeVendedor;
     @FXML private Label lblPrecoOuTroca;
+    @FXML private Button btnAcao;
 
     public BookCardController(Anuncio anuncio) {
         this.anuncio = anuncio;
@@ -40,6 +42,7 @@ public class BookCardController {
             } else if (anuncio instanceof AnuncioTroca) {
                 AnuncioTroca troca = (AnuncioTroca) anuncio;
                 lblPrecoOuTroca.setText("Troca por: " + troca.getProcura());
+                btnAcao.setText("Trocar");
             }
         }
     }
@@ -53,6 +56,10 @@ public class BookCardController {
 
     @FXML
     private void handleAdicionar() {
-        CartManager.getInstance().addItem(anuncio);
+        if (anuncio instanceof AnuncioTroca) {
+            TradeManager.proporTroca((AnuncioTroca) anuncio);
+        } else {
+            CartManager.getInstance().addItem(anuncio);
+        }
     }
 }
