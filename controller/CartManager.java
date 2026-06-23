@@ -70,6 +70,11 @@ public class CartManager {
             return;
         }
         
+        model.AnuncioRepository repo = new model.AnuncioRepository();
+        for (Anuncio item : items) {
+            repo.removerAnuncio(item);
+        }
+        
         showFeedback("Sucesso", "Compra Finalizada", "Compra finalizada com sucesso! Total: R$ " + String.format("%.2f", getTotal()));
         clear();
     }

@@ -62,4 +62,9 @@ public class BookDetailsController {
             ViewController.getInstance().navToCatalog();
         }
     }
+
+    @FXML
+    private void handleAdicionarAoCarrinho() {
+        CartManager.getInstance().addItem(anuncio);
+    }
 }

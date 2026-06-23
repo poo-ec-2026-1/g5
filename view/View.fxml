@@ -107,6 +107,18 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#navToCart" prefHeight="40.0" prefWidth="220.0" styleClass="btn-menu" text="Carrinho">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/images/menuCarrinho.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </VBox>
          </left>

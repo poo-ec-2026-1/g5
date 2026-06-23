@@ -103,6 +103,11 @@ public class ViewController {
 	private void navToAddBook() {
 	    loadView("/view/AddBookView.fxml");
 	}
+
+	@FXML
+	private void navToCart() {
+	    loadView("/view/CartView.fxml");
+	}
 	
 	private void loadView(String fxmlPath) {
 	    try {

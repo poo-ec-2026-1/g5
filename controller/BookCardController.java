@@ -50,4 +50,9 @@ public class BookCardController {
             ViewController.getInstance().mostrarDetalhesLivro(anuncio);
         }
     }
+
+    @FXML
+    private void handleAdicionar() {
+        CartManager.getInstance().addItem(anuncio);
+    }
 }
