@@ -16,36 +16,6 @@ public class AnuncioRepository {
             livroDao = DaoManager.createDao(Database.getConnectionSource(), Livro.class);
             anuncioVendaDao = DaoManager.createDao(Database.getConnectionSource(), AnuncioVenda.class);
             anuncioTrocaDao = DaoManager.createDao(Database.getConnectionSource(), AnuncioTroca.class);
-            inicializarDemoAnuncios();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void inicializarDemoAnuncios() {
-        try {
-            if (anuncioVendaDao != null && anuncioVendaDao.countOf() == 0 && 
-                anuncioTrocaDao != null && anuncioTrocaDao.countOf() == 0) {
-                
-                Dao<Usuario, String> usuarioDao = DaoManager.createDao(Database.getConnectionSource(), Usuario.class);
-                Usuario demoUser = usuarioDao.queryForId("guilhermew@email.com");
-                if (demoUser == null) {
-                    demoUser = new Usuario("Guilherme William", "guilhermew@email.com", "(00) 00000-0000", controller.SecurityUtils.hashSenha("senha123"));
-                    usuarioDao.create(demoUser);
-                }
-
-                Livro livro1 = new Livro("Código Limpo", "Robert C. Martin", "9788576082675", "Seminovo");
-                livroDao.create(livro1);
-
-                AnuncioVenda venda = new AnuncioVenda(livro1, demoUser, 85.00, "Livro essencial para desenvolvedores Java.");
-                anuncioVendaDao.create(venda);
-
-                Livro livro2 = new Livro("Design Patterns", "Erich Gamma", "9788573076103", "Usado");
-                livroDao.create(livro2);
-
-                AnuncioTroca troca = new AnuncioTroca(livro2, demoUser, "Refactoring por Martin Fowler", "Clássico em bom estado.");
-                anuncioTrocaDao.create(troca);
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

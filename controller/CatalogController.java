@@ -20,8 +20,14 @@ public class CatalogController {
         AnuncioRepository repo = new AnuncioRepository();
         List<Anuncio> anuncios = repo.listarTodos();
         
-        for (Anuncio anuncio : anuncios) {
-            carregarCard(anuncio);
+        if (anuncios.isEmpty()) {
+            javafx.scene.control.Label label = new javafx.scene.control.Label("Nenhum livro no catálogo");
+            label.setStyle("-fx-font-size: 18px; -fx-text-fill: #6C757D; -fx-font-style: italic;");
+            cardsContainer.getChildren().add(label);
+        } else {
+            for (Anuncio anuncio : anuncios) {
+                carregarCard(anuncio);
+            }
         }
     }
 
