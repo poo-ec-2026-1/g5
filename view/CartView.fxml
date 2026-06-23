@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane styleClass="bg-default" stylesheets="@application.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CartController">
+   <children>
+      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <Label styleClass="title-1" text="Meu Carrinho de Compras" BorderPane.alignment="CENTER_LEFT">
+               <BorderPane.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <center>
+            <HBox spacing="20.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" />
+               </BorderPane.margin>
+               <children>
+                  <!-- List of items (Left) -->
+                  <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                     <content>
+                        <VBox fx:id="cartItemsContainer" spacing="15.0" style="-fx-background-color: #F8F9FA;">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+                  
+                  <!-- Order Summary (Right) -->
+                  <VBox prefWidth="300.0" spacing="20.0" styleClass="surface">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <children>
+                        <Label styleClass="title-2" text="Resumo do Pedido" />
+                        
+                        <VBox spacing="10.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label text="Quantidade de Itens:" textFill="#6C757D">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label fx:id="lblTotalItens" text="0" textFill="#212529">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label text="Total das Vendas:" textFill="#6C757D">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label fx:id="lblPrecoTotal" text="R$ 0,00" textFill="#2D6A4F">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        
+                        <Region VBox.vgrow="ALWAYS" />
+                        
+                        <VBox spacing="10.0">
+                           <children>
+                              <Button fx:id="btnCheckout" mnemonicParsing="false" onAction="#handleCheckout" prefHeight="40.0" prefWidth="260.0" styleClass="btn-primary" text="Finalizar Compra">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button fx:id="btnClear" mnemonicParsing="false" onAction="#handleClear" prefHeight="40.0" prefWidth="260.0" style="-fx-background-color: -fx-error-color;" styleClass="btn-primary" text="Esvaziar Carrinho">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
