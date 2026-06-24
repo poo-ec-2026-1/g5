@@ -79,7 +79,7 @@ Copie de: C:\caminho-para-seu-sdk\javafx-sdk-26\bin\*.dll
 Abaixo está a representação estrutural do domínio principal do TradeLibrary, demonstrando a herança polimórfica dos anúncios.
 
 
-![Diagrama de Classes](resources/images/diagramadeclasses.png)
+
 
 
 
