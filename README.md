@@ -2,9 +2,39 @@
 
 <p align="center">
   <img src="resources/images/librarylogo1.png" alt="TradeLibrary Logo" width="180">
+  <img src="resources/images/LogotipoTexto.png" width="500">
 </p>
 
 O **TradeLibrary** é um sistema desktop *Peer-to-Peer* (P2P) desenvolvido em Java e JavaFX para facilitar a compra, venda e troca de livros novos e usados. O projeto aplica conceitos sólidos de Programação Orientada a Objetos (POO), arquitetura MVC e persistência de dados local sem o uso de servidores externos.
+
+---
+
+## Preview do Programa Funcionando
+
+<p align="center">
+  <img src="resources/images/Cadastro.gif" alt="Cadastro de usuário" width="480" />
+</p>
+<p align="center"><em>Figura 1: Cadastro de usuário</em></p>
+
+<p align="center">
+  <img src="resources/images/Login.gif" alt="Login de usuário" width="480" />
+</p>
+<p align="center"><em>Figura 2: Login de usuário</em></p>
+
+<p align="center">
+  <img src="resources/images/CadastrandoLivro.gif" alt="Cadastro de livro" width="480" />
+</p>
+<p align="center"><em>Figura 3: Cadastro de livro</em></p>
+
+<p align="center">
+  <img src="resources/images/VendoLivroCadastrado.gif" alt="Livro cadastrado à venda" width="480" />
+</p>
+<p align="center"><em>Figura 4: Livro cadastrado à venda</em></p>
+
+<p align="center">
+  <img src="resources/images/ComprandoLivro.gif" alt="Comprando livro" width="480" />
+</p>
+<p align="center"><em>Figura 5: Compra de livro</em></p>
 
 ---
 
@@ -93,4 +123,6 @@ Abaixo está a representação estrutural do domínio principal do TradeLibrary,
 
 Este diagrama representa o fluxo principal de um usuário utilizando o sistema para cadastrar um interesse de troca.
 
-![Fluxo de Troca](resources/images/casosdeuso.png)
+<p align="center">
+  <img src="resources/images/casosdeuso.png" alt="Fluxo de troca" width="720" />
+</p>
