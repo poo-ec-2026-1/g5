@@ -1,8 +1,10 @@
 package controller;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import model.AnuncioTroca;
 import model.AnuncioRepository;
 import java.util.Optional;
@@ -17,6 +19,27 @@ public class TradeManager {
                            + "O anunciante procura por: '" + anuncio.getProcura() + "'");
         dialog.setContentText("Digite o título do livro que você oferece em troca:");
 
+        // Estilização do TextInputDialog com ícone e CSS
+        try {
+            Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image(TradeManager.class.getResourceAsStream("/resources/images/librarylogo1.png")));
+            
+            ImageView logoView = new ImageView(new Image(TradeManager.class.getResourceAsStream("/resources/images/librarylogo1.png")));
+            logoView.setFitWidth(40);
+            logoView.setFitHeight(40);
+            logoView.setPreserveRatio(true);
+            
+            // Container com fundo escuro para destacar o logo branco
+            StackPane logoContainer = new StackPane(logoView);
+            logoContainer.setStyle("-fx-background-color: #1E1E1E; -fx-background-radius: 8; -fx-padding: 8;");
+            dialog.setGraphic(logoContainer);
+            
+            dialog.getDialogPane().getStylesheets().add(TradeManager.class.getResource("/view/application.css").toExternalForm());
+            dialog.getDialogPane().getStyleClass().add("custom-alert");
+        } catch (Exception e) {
+            System.err.println("Não foi possível estilizar o diálogo de entrada: " + e.getMessage());
+        }
+
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent() && !result.get().trim().isEmpty()) {
             String livroOferecido = result.get().trim();
@@ -25,28 +48,28 @@ public class TradeManager {
             AnuncioRepository repo = new AnuncioRepository();
             repo.removerAnuncio(anuncio);
             
-            // Mostra informações do vendedor
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Troca Solicitada");
-            alert.setHeaderText("Proposta de Troca Enviada com Sucesso!");
-            alert.setContentText("Você ofereceu o livro: '" + livroOferecido + "'\n"
-                               + "Em troca de: '" + anuncio.getLivro().getTitulo() + "'\n\n"
-                               + "Entre em contato com o anunciante para combinar a entrega:\n"
-                               + "Nome: " + anuncio.getVendedor().getNome() + "\n"
-                               + "Telefone: " + anuncio.getVendedor().getFone() + "\n"
-                               + "E-mail: " + anuncio.getVendedor().getEmail());
-            alert.showAndWait();
+            // Mostra informações do vendedor usando AlertHelper
+            AlertHelper.showInfo(
+                "Troca Solicitada",
+                "Proposta de Troca Enviada com Sucesso!",
+                "Você ofereceu o livro: '" + livroOferecido + "'\n"
+                + "Em troca de: '" + anuncio.getLivro().getTitulo() + "'\n\n"
+                + "Entre em contato com o anunciante para combinar a entrega:\n"
+                + "Nome: " + anuncio.getVendedor().getNome() + "\n"
+                + "Telefone: " + anuncio.getVendedor().getFone() + "\n"
+                + "E-mail: " + anuncio.getVendedor().getEmail()
+            );
             
             // Recarrega o catálogo
             if (ViewController.getInstance() != null) {
                 ViewController.getInstance().navToCatalog();
             }
         } else if (result.isPresent()) {
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("Aviso");
-            alert.setHeaderText("Campo Vazio");
-            alert.setContentText("Você precisa digitar o título de um livro para propor a troca.");
-            alert.showAndWait();
+            AlertHelper.showWarning(
+                "Aviso",
+                "Campo Vazio",
+                "Você precisa digitar o título de um livro para propor a troca."
+            );
         }
     }
 }

@@ -49,7 +49,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnAcao" mnemonicParsing="false" onAction="#handleAdicionar" prefWidth="85.0" style="-fx-background-color: -fx-secondary-color;" styleClass="btn-primary" text="Carrinho">
+            <Button fx:id="btnAcao" mnemonicParsing="false" onAction="#handleAdicionar" prefWidth="85.0" styleClass="btn-primary" text="Carrinho">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
