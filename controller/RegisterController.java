@@ -103,7 +103,8 @@ public class RegisterController {
         }
 
         if (valido) {
-            Usuario novoUsuario = new Usuario(nome, email, fone, senha);
+            String senhaCriptografada = SecurityUtils.hashSenha(senha);
+            Usuario novoUsuario = new Usuario(nome, email, fone, senhaCriptografada);
             boolean cadastrado = repository.cadastrar(novoUsuario);
 
             if (cadastrado) {

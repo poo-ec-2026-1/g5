@@ -33,6 +33,7 @@ public class SessionManager {
 
     public void logout() {
         usuarioLogado = null;
+        CartManager.getInstance().clear();
     }
 
     public Usuario getUsuarioLogado() {

@@ -21,7 +21,7 @@ public class UsuarioRepository {
         try {
             String demoEmail = "guilhermew@email.com";
             if (usuarioDao != null && usuarioDao.queryForId(demoEmail) == null) {
-                Usuario demoUser = new Usuario("Guilherme William", demoEmail, "(00) 00000-0000", "senha123");
+               Usuario demoUser = new Usuario("Guilherme William", demoEmail, "(00) 00000-0000", controller.SecurityUtils.hashSenha("senha123"));
                 usuarioDao.create(demoUser);
             }
         } catch (SQLException e) {
@@ -91,8 +91,11 @@ public class UsuarioRepository {
         }
     }
 
-    public boolean validarLogin(String email, String senha) {
-        Usuario usuario = buscarPorEmail(email);
-        return usuario != null && usuario.getSenha().equals(senha);
-    }
+   public boolean validarLogin(String email, String senha) {
+    Usuario usuario = buscarPorEmail(email);
+    if (usuario == null) return false;
+
+    String hashDigitado = controller.SecurityUtils.hashSenha(senha);
+    return usuario.getSenha().equals(hashDigitado);
+}
 }

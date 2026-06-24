@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -41,11 +42,20 @@
             </Label>
          </children>
       </VBox>
-      <Button mnemonicParsing="false" onAction="#handleVerMais" prefWidth="180.0" styleClass="btn-primary" text="Ver Mais">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
+      <HBox alignment="CENTER" spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleVerMais" prefWidth="85.0" styleClass="btn-primary" text="Ver Mais">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnAcao" mnemonicParsing="false" onAction="#handleAdicionar" prefWidth="85.0" style="-fx-background-color: -fx-secondary-color;" styleClass="btn-primary" text="Carrinho">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

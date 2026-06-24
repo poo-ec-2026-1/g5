@@ -13,9 +13,14 @@
 
 <VBox prefHeight="700.0" prefWidth="900.0" spacing="20.0" styleClass="bg-default" stylesheets="@application.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="50.0" spacing="10.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="50.0" spacing="15.0">
          <children>
             <Button mnemonicParsing="false" onAction="#handleVoltar" styleClass="btn-primary" text="← Voltar ao Catálogo">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnAcao" mnemonicParsing="false" onAction="#handleAdicionarAoCarrinho" style="-fx-background-color: -fx-secondary-color;" styleClass="btn-primary" text="🛒 Adicionar ao Carrinho">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
