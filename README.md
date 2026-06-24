@@ -36,6 +36,11 @@ O **TradeLibrary** é um sistema desktop *Peer-to-Peer* (P2P) desenvolvido em Ja
 </p>
 <p align="center"><em>Figura 5: Compra de livro</em></p>
 
+<p align="center">
+  <img src="resources/images/TrocaDeLivro.gif" alt="Trocando livro" width="480" />
+</p>
+<p align="center"><em>Figura 6: Troca de livro</em></p>
+
 ---
 
 ## 📂 Estrutura de Pastas
