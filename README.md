@@ -62,7 +62,7 @@ g5/
 
 ## Pré-requisitos
 
-- JDK 25 ou superior** — recomendado: [Eclipse Temurin](https://adoptium.net/)
+- **JDK 25 ou superior** — recomendado: [Eclipse Temurin](https://adoptium.net/)
 - **JavaFX SDK 26** — baixar em: [https://gluonhq.com/products/javafx/](https://gluonhq.com/products/javafx/)
 
 ## Configuração inicial (faça uma vez)
