@@ -80,15 +80,10 @@ public class CartManager {
     }
 
     private void showFeedback(String title, String header, String content) {
-        try {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle(title);
-            alert.setHeaderText(header);
-            alert.setContentText(content);
-            alert.showAndWait();
-        } catch (Exception e) {
-            // Em caso de execução sem GUI ou headless em testes
-            System.out.println("[" + title + "] " + header + ": " + content);
+        if ("Aviso".equalsIgnoreCase(title)) {
+            AlertHelper.showWarning(title, header, content);
+        } else {
+            AlertHelper.showInfo(title, header, content);
         }
     }
 }

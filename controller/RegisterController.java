@@ -103,13 +103,21 @@ public class RegisterController {
         }
 
         if (valido) {
+            // Aplica a criptografia na senha digitada
             String senhaCriptografada = SecurityUtils.hashSenha(senha);
             Usuario novoUsuario = new Usuario(nome, email, fone, senhaCriptografada);
             boolean cadastrado = repository.cadastrar(novoUsuario);
 
             if (cadastrado) {
-                // Realiza o login automático
-                SessionManager.getInstance().login(email, senha);
+                // ALERTA VISUAL: Sucesso no cadastro
+                javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+                alert.setTitle("Cadastro Concluído");
+                alert.setHeaderText(null);
+                alert.setContentText("Seu usuário foi criado com sucesso! Bem-vindo ao TradeLibrary.");
+                alert.showAndWait();
+
+                // Realiza o login automático usando a senha criptografada
+                SessionManager.getInstance().login(email, senhaCriptografada);
 
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/View.fxml"));
@@ -123,6 +131,13 @@ public class RegisterController {
                     lblErroGeral.setManaged(true);
                 }
             } else {
+                // ALERTA VISUAL: Erro se o banco de dados falhar
+                javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+                alert.setTitle("Erro no Sistema");
+                alert.setHeaderText("Não foi possível salvar os dados");
+                alert.setContentText("Ocorreu uma falha interna ao tentar salvar o usuário. Por favor, tente novamente.");
+                alert.showAndWait();
+
                 lblErroGeral.setText("Erro ao salvar o usuário no banco de dados.");
                 lblErroGeral.setVisible(true);
                 lblErroGeral.setManaged(true);
@@ -133,7 +148,7 @@ public class RegisterController {
             lblErroGeral.setManaged(true);
         }
     }
-
+    
     @FXML
     private void navToLogin() {
         try {
