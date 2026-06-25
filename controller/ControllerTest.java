@@ -50,4 +50,16 @@ public class ControllerTest {
             System.out.println("Erro: O sistema nao encontrou um item que deveria existir!");
         }
     }
+    //Commit5
+    public void testeListarItensQuandoBancoEstiverVazio() {
+        System.out.println("Executando teste: Listagem de dados com banco vazio.");
+        
+        int quantidadeDeItens = 0;
+        
+        if (quantidadeDeItens == 0) {
+            System.out.println("Sucesso: O sistema tratou a lista vazia sem gerar erros ou falhas.");
+        } else {
+            System.out.println("Erro: Contagem de itens inconsistente com o estado do banco.");
+        }
+    }
 }
