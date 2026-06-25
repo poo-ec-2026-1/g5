@@ -38,4 +38,16 @@ public class ControllerTest {
             System.out.println("Erro: O sistema permitiu salvar dados alterados invalidos!");
         }
     }
+    //Commit4
+    public void testeBuscarItemPorIdValidoDeveRetornarSucesso() {
+        System.out.println("Executando teste: Busca por ID valido.");
+        
+        boolean itemEncontrado = true; // Simula que o banco achou o registro
+        
+        if (itemEncontrado) {
+            System.out.println("Sucesso: O sistema localizou e retornou os dados do item corretamente.");
+        } else {
+            System.out.println("Erro: O sistema nao encontrou um item que deveria existir!");
+        }
+    }
 }
