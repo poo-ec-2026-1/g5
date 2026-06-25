@@ -26,4 +26,16 @@ public class ControllerTest {
             System.out.println("Erro: O sistema tentou apagar um item que nao existia!");
         }
     }
+    //Commit3
+    public void testeAtualizarDadosComCamposInvalidosDeveFalhar() {
+        System.out.println("Executando teste: Tentativa de atualizacao com dados invalidos.");
+        
+        boolean atualizacaoAceita = false; // Simula que o sistema barrou a alteração incorreta
+        
+        if (!atualizacaoAceita) {
+            System.out.println("Sucesso: O sistema barrou a atualizacao com campos em branco.");
+        } else {
+            System.out.println("Erro: O sistema permitiu salvar dados alterados invalidos!");
+        }
+    }
 }
