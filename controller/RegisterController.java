@@ -113,23 +113,10 @@ public class RegisterController {
                 javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
                 alert.setTitle("Cadastro Concluído");
                 alert.setHeaderText(null);
-                alert.setContentText("Seu usuário foi criado com sucesso! Bem-vindo ao TradeLibrary.");
+                alert.setContentText("Seu usuário foi criado com sucesso! Por favor, faça login para acessar a plataforma.");
                 alert.showAndWait();
 
-                // Realiza o login automático usando a senha criptografada
-                SessionManager.getInstance().login(email, senhaCriptografada);
-
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/View.fxml"));
-                    loader.setClassLoader(getClass().getClassLoader());
-                    Parent mainRoot = loader.load();
-                    txtNome.getScene().setRoot(mainRoot);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    lblErroGeral.setText("Erro ao carregar a tela principal.");
-                    lblErroGeral.setVisible(true);
-                    lblErroGeral.setManaged(true);
-                }
+                navToLogin();
             } else {
                 // ALERTA VISUAL: Erro se o banco de dados falhar
                 javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
