@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import model.Anuncio;
 import model.AnuncioVenda;
+import model.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,14 @@ public class CartManager {
 
     public void addItem(Anuncio anuncio) {
         if (anuncio == null) return;
+        
+        // Impede adicionar livro postado por si mesmo
+        Usuario logado = SessionManager.getInstance().getUsuarioLogado();
+        if (logado != null && anuncio.getVendedor() != null && 
+            logado.getEmail().equals(anuncio.getVendedor().getEmail())) {
+            showFeedback("Aviso", "Ação Inválida", "Você não pode adicionar seu próprio livro ao carrinho.");
+            return;
+        }
         
         // Evita duplicados
         for (Anuncio item : items) {

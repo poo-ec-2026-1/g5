@@ -105,7 +105,7 @@
                   
                   <Label fx:id="lblErro" managed="false" styleClass="error-text" text="Credenciais inválidas. Tente novamente." textFill="RED" visible="false" />
                   
-                  <Button fx:id="btnEntrar" mnemonicParsing="false" onAction="#handleLogin" prefHeight="45.0" prefWidth="400.0" styleClass="btn-primary" text="Entrar">
+                  <Button fx:id="btnEntrar" defaultButton="true" mnemonicParsing="false" onAction="#handleLogin" prefHeight="45.0" prefWidth="400.0" styleClass="btn-primary" text="Entrar">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

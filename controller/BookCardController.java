@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import model.Anuncio;
 import model.AnuncioVenda;
 import model.AnuncioTroca;
+import model.Usuario;
 
 public class BookCardController {
     private final Anuncio anuncio;
@@ -43,6 +44,15 @@ public class BookCardController {
                 AnuncioTroca troca = (AnuncioTroca) anuncio;
                 lblPrecoOuTroca.setText("Troca por: " + troca.getProcura());
                 btnAcao.setText("Trocar");
+            }
+
+            // Impede comprar/trocar livro postado por si mesmo
+            Usuario logado = SessionManager.getInstance().getUsuarioLogado();
+            if (logado != null && anuncio.getVendedor() != null && 
+                logado.getEmail().equals(anuncio.getVendedor().getEmail())) {
+                btnAcao.setText("Seu Anúncio");
+                btnAcao.setDisable(true);
+                btnAcao.setStyle("-fx-background-color: #6C757D; -fx-text-fill: white; -fx-opacity: 0.8;");
             }
         }
     }

@@ -7,11 +7,24 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.AnuncioTroca;
 import model.AnuncioRepository;
+import model.Usuario;
 import java.util.Optional;
 
 public class TradeManager {
     public static void proporTroca(AnuncioTroca anuncio) {
         if (anuncio == null) return;
+
+        // Impede trocar livro postado por si mesmo
+        Usuario logado = SessionManager.getInstance().getUsuarioLogado();
+        if (logado != null && anuncio.getVendedor() != null && 
+            logado.getEmail().equals(anuncio.getVendedor().getEmail())) {
+            AlertHelper.showWarning(
+                "Aviso",
+                "Ação Inválida",
+                "Você não pode propor uma troca para o seu próprio anúncio."
+            );
+            return;
+        }
 
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Proposta de Troca");
