@@ -18,6 +18,8 @@ public class Database {
             TableUtils.createTableIfNotExists(connectionSource, Livro.class);
             TableUtils.createTableIfNotExists(connectionSource, AnuncioVenda.class);
             TableUtils.createTableIfNotExists(connectionSource, AnuncioTroca.class);
+            // Cria a tabela de itens do carrinho
+            TableUtils.createTableIfNotExists(connectionSource, CartItem.class);
         }
         return connectionSource;
     }

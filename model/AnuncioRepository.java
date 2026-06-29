@@ -91,4 +91,22 @@ public class AnuncioRepository {
             return false;
         }
     }
+
+    public AnuncioVenda buscarVendaPorId(int id) {
+        try {
+            return anuncioVendaDao.queryForId(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public AnuncioTroca buscarTrocaPorId(int id) {
+        try {
+            return anuncioTrocaDao.queryForId(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -5,6 +5,9 @@ import javafx.scene.control.Alert.AlertType;
 import model.Anuncio;
 import model.AnuncioVenda;
 import model.Usuario;
+import model.AnuncioRepository;
+import model.CartItem;
+import model.CartItemRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +15,11 @@ import java.util.List;
 public class CartManager {
     private static CartManager instance;
     private final List<Anuncio> items;
+    private final CartItemRepository cartItemRepo;
 
     private CartManager() {
         this.items = new ArrayList<>();
+        this.cartItemRepo = new CartItemRepository();
     }
 
     public static synchronized CartManager getInstance() {
@@ -26,6 +31,30 @@ public class CartManager {
 
     public List<Anuncio> getItems() {
         return new ArrayList<>(items);
+    }
+
+    public void loadCartForUser(Usuario usuario) {
+        if (usuario == null) return;
+        items.clear();
+        
+        List<CartItem> dbItems = cartItemRepo.buscarPorUsuario(usuario);
+        AnuncioRepository anuncioRepo = new AnuncioRepository();
+        
+        for (CartItem dbItem : dbItems) {
+            Anuncio anuncio = null;
+            if ("VENDA".equals(dbItem.getTipoAnuncio())) {
+                anuncio = anuncioRepo.buscarVendaPorId(dbItem.getAnuncioId());
+            } else if ("TROCA".equals(dbItem.getTipoAnuncio())) {
+                anuncio = anuncioRepo.buscarTrocaPorId(dbItem.getAnuncioId());
+            }
+            
+            if (anuncio != null) {
+                items.add(anuncio);
+            } else {
+                // Remove o item órfão do banco de dados (se o livro foi comprado por outro ou excluído)
+                cartItemRepo.remover(usuario, dbItem.getAnuncioId(), dbItem.getTipoAnuncio());
+            }
+        }
     }
 
     public void addItem(Anuncio anuncio) {
@@ -50,16 +79,33 @@ public class CartManager {
             }
         }
         
+        // Salva persistência se houver usuário logado
+        if (logado != null) {
+            String tipo = (anuncio instanceof AnuncioVenda) ? "VENDA" : "TROCA";
+            cartItemRepo.salvar(new CartItem(logado, anuncio.getId(), tipo));
+        }
+        
         items.add(anuncio);
         showFeedback("Sucesso", "Adicionado ao Carrinho", "O livro '" + anuncio.getLivro().getTitulo() + "' foi adicionado ao seu carrinho.");
     }
 
     public void removeItem(Anuncio anuncio) {
         if (anuncio == null) return;
+        
+        Usuario logado = SessionManager.getInstance().getUsuarioLogado();
+        if (logado != null) {
+            String tipo = (anuncio instanceof AnuncioVenda) ? "VENDA" : "TROCA";
+            cartItemRepo.remover(logado, anuncio.getId(), tipo);
+        }
+        
         items.remove(anuncio);
     }
 
     public void clear() {
+        Usuario logado = SessionManager.getInstance().getUsuarioLogado();
+        if (logado != null) {
+            cartItemRepo.limparParaUsuario(logado);
+        }
         items.clear();
     }
 

@@ -26,6 +26,7 @@ public class SessionManager {
     public boolean login(String email, String senha) {
         if (usuarioRepository.validarLogin(email, senha)) {
             usuarioLogado = usuarioRepository.buscarPorEmail(email);
+            CartManager.getInstance().loadCartForUser(usuarioLogado);
             return true;
         }
         return false;
