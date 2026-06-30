@@ -8,6 +8,8 @@ import model.Usuario;
 import model.AnuncioRepository;
 import model.CartItem;
 import model.CartItemRepository;
+import model.Transacao;
+import model.TransacaoRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,8 +127,24 @@ public class CartManager {
             return;
         }
         
-        model.AnuncioRepository repo = new model.AnuncioRepository();
+        Usuario logado = SessionManager.getInstance().getUsuarioLogado();
+        TransacaoRepository transacaoRepo = new TransacaoRepository();
+        AnuncioRepository repo = new AnuncioRepository();
+        
         for (Anuncio item : items) {
+            if (logado != null) {
+                String detalhes = String.format("R$ %.2f", item.getPreco());
+                String dataStr = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
+                Transacao transacao = new Transacao(
+                    "VENDA",
+                    item.getLivro() != null ? item.getLivro().getTitulo() : "Livro Desconhecido",
+                    item.getVendedor(),
+                    logado,
+                    detalhes,
+                    dataStr
+                );
+                transacaoRepo.registrar(transacao);
+            }
             repo.removerAnuncio(item);
         }
         

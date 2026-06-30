@@ -20,6 +20,9 @@ public class Database {
             TableUtils.createTableIfNotExists(connectionSource, AnuncioTroca.class);
             // Cria a tabela de itens do carrinho
             TableUtils.createTableIfNotExists(connectionSource, CartItem.class);
+            // Cria as tabelas de propostas e transações
+            TableUtils.createTableIfNotExists(connectionSource, Proposta.class);
+            TableUtils.createTableIfNotExists(connectionSource, Transacao.class);
         }
         return connectionSource;
     }

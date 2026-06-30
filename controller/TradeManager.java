@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import model.AnuncioTroca;
 import model.AnuncioRepository;
 import model.Usuario;
+import model.Proposta;
+import model.PropostaRepository;
 import java.util.Optional;
 
 public class TradeManager {
@@ -57,21 +59,25 @@ public class TradeManager {
         if (result.isPresent() && !result.get().trim().isEmpty()) {
             String livroOferecido = result.get().trim();
             
-            // Remove do banco de dados (troca concluída)
-            AnuncioRepository repo = new AnuncioRepository();
-            repo.removerAnuncio(anuncio);
+            if (logado == null) {
+                AlertHelper.showWarning("Aviso", "Erro de Sessão", "Você precisa estar logado para propor uma troca.");
+                return;
+            }
             
-            // Mostra informações do vendedor usando AlertHelper
-            AlertHelper.showInfo(
-                "Troca Solicitada",
-                "Proposta de Troca Enviada com Sucesso!",
-                "Você ofereceu o livro: '" + livroOferecido + "'\n"
-                + "Em troca de: '" + anuncio.getLivro().getTitulo() + "'\n\n"
-                + "Entre em contato com o anunciante para combinar a entrega:\n"
-                + "Nome: " + anuncio.getVendedor().getNome() + "\n"
-                + "Telefone: " + anuncio.getVendedor().getFone() + "\n"
-                + "E-mail: " + anuncio.getVendedor().getEmail()
-            );
+            Proposta proposta = new Proposta(anuncio, logado, livroOferecido);
+            PropostaRepository propostaRepo = new PropostaRepository();
+            boolean salva = propostaRepo.salvar(proposta);
+            
+            if (salva) {
+                AlertHelper.showInfo(
+                    "Proposta Enviada",
+                    "Proposta de Troca Enviada com Sucesso!",
+                    "Sua proposta oferecendo o livro '" + livroOferecido + "' em troca de '" + anuncio.getLivro().getTitulo() + "' foi enviada para o anunciante.\n\n"
+                    + "Aguarde a avaliação dele. Você receberá o contato quando ela for aceita."
+                );
+            } else {
+                AlertHelper.showWarning("Erro", "Erro ao salvar", "Ocorreu um erro ao enviar sua proposta. Tente novamente.");
+            }
             
             // Recarrega o catálogo
             if (ViewController.getInstance() != null) {

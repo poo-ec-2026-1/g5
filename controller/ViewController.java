@@ -109,6 +109,11 @@ public class ViewController {
 	    loadView("/view/CartView.fxml");
 	}
 	
+	@FXML
+	private void navToProposals() {
+	    loadView("/view/ProposalsView.fxml");
+	}
+	
 	private void loadView(String fxmlPath) {
 	    try {
 	        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
