@@ -126,7 +126,7 @@
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resources/images/menuInicio.png" />
+                              <Image url="@../resources/images/propostaIcone.png" />
                            </image>
                         </ImageView>
                      </graphic>

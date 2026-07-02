@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="200.0" spacing="10.0" styleClass="surface" stylesheets="@application.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" prefHeight="320.0" prefWidth="240.0" spacing="10.0" styleClass="surface" stylesheets="@application.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="120.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -44,12 +44,12 @@
       </VBox>
       <HBox alignment="CENTER" spacing="10.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleVerMais" prefWidth="85.0" styleClass="btn-primary" text="Ver Mais">
+            <Button mnemonicParsing="false" onAction="#handleVerMais" styleClass="btn-primary" text="Ver Mais">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnAcao" mnemonicParsing="false" onAction="#handleAdicionar" prefWidth="85.0" styleClass="btn-primary" text="Carrinho">
+            <Button fx:id="btnAcao" mnemonicParsing="false" onAction="#handleAdicionar" styleClass="btn-primary" text="Carrinho">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
