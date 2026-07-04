@@ -3,6 +3,7 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -109,17 +110,30 @@ public class RegisterController {
             boolean cadastrado = repository.cadastrar(novoUsuario);
 
             if (cadastrado) {
-                // ALERTA VISUAL: Sucesso no cadastro
-                javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-                alert.setTitle("Cadastro Concluído");
-                alert.setHeaderText(null);
-                alert.setContentText("Seu usuário foi criado com sucesso! Por favor, faça login para acessar a plataforma.");
-                alert.showAndWait();
+                // CORREÇÃO: Faz o login automático usando a variável 'senha' (sem hash)
+                boolean loginAprovado = repository.validarLogin(email, senha);
 
-                navToLogin();
+                if (loginAprovado) {
+                    // ALERTA VISUAL: Sucesso no cadastro e login
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Cadastro Concluído");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Seu usuário foi criado com sucesso! Entrando no sistema...");
+                    alert.showAndWait();
+
+                    // Limpa a variável da senha da memória por segurança
+                    senha = "";
+
+                    // Chama a tela principal
+                    navToHome();
+
+                } else {
+                    navToLogin(); // Caso o login automático falhe
+                }
+
             } else {
                 // ALERTA VISUAL: Erro se o banco de dados falhar
-                javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erro no Sistema");
                 alert.setHeaderText("Não foi possível salvar os dados");
                 alert.setContentText("Ocorreu uma falha interna ao tentar salvar o usuário. Por favor, tente novamente.");
@@ -143,6 +157,18 @@ public class RegisterController {
             loader.setClassLoader(getClass().getClassLoader());
             Parent loginRoot = loader.load();
             txtNome.getScene().setRoot(loginRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void navToHome() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HomeView.fxml"));
+            loader.setClassLoader(getClass().getClassLoader());
+            Parent homeRoot = loader.load();
+            txtNome.getScene().setRoot(homeRoot);
         } catch (IOException e) {
             e.printStackTrace();
         }
