@@ -1,7 +1,5 @@
 # Relatório Individual Final - Projeto POO
 
-## Obs: A maior parte do texto é o mesmo do relatório anterior pois não mudou muita coisa entre aquele relatório e esse
-
 <p align="center"><img src="../../resources/images/librarylogo1.png" alt="Logotipo TradeLibrary" width="280" /></p>
 
 **Projeto:** TradeLibrary (Plataforma de Troca e Venda de Livros)
