@@ -81,3 +81,6 @@ Com a conclusão da persistência do carrinho, controle de propostas de troca e 
 
 ### Conclusão
 A implementação das regras do backend e do banco de dados SQLite provou-se sólida e flexível, permitindo a expansão ágil de novas regras de negócio essenciais (como a persistência do carrinho, controle transacional e propostas de troca) sem comprometer a integridade e as boas práticas de orientação a objetos acordadas com a equipe.
+
+## 5. Apresentação em vídeo do relatório
+* [Vídeo apresentando o relatório (Google Drive)](https://drive.google.com/file/d/1bT0Ax3xtllFQzIUJvWUjWvcZ0qtCGT6m/view?usp=sharing)
