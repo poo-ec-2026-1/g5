@@ -1,0 +1,50 @@
+@startuml Compra de Livro - Sequencia
+
+skinparam BoxPadding 10
+skinparam ParticipantPadding 10
+skinparam ParticipantBorderColor #2D6A4F
+skinparam ParticipantBackgroundColor White
+skinparam ActorBorderColor #2D6A4F
+skinparam ActorBackgroundColor White
+skinparam ArrowColor #2D6A4F
+
+actor "Comprador" as User
+participant "CartController" as CC
+participant "CartManager" as CM
+participant "TransacaoRepository" as TR
+participant "AnuncioRepository" as AR
+participant "CartItemRepository" as CIR
+database "Database (SQLite)" as DB
+
+User -> CC : Clique "Finalizar Compra"
+activate CC
+CC -> CM : checkout()
+activate CM
+
+loop Para cada item no carrinho
+    CM -> TR : registrar(Transacao)
+    activate TR
+    TR -> DB : create(transacao "VENDA")
+    deactivate TR
+    
+    CM -> AR : removerAnuncio(anuncio)
+    activate AR
+    AR -> DB : delete(anuncio_venda)
+    deactivate AR
+end
+
+CM -> CM : clear()
+activate CM
+CM -> CIR : limparParaUsuario(usuarioLogado)
+activate CIR
+CIR -> DB : delete todos CartItem do usuario
+deactivate CIR
+CM --> CM : items.clear()
+deactivate CM
+
+CM --> CC : Exibe confirmação com Total da compra
+deactivate CM
+CC --> User : Atualiza tela do carrinho (vazio)
+deactivate CC
+
+@enduml

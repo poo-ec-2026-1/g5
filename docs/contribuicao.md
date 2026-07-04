@@ -1,8 +1,6 @@
 # Guia de Contribuição - TradeLibrary
 
-Projeto **TradeLibrary**.
-
- Este guia foi criado para orientar os desenvolvedores do grupo sobre os padrões de desenvolvimento adotados e as instruções de configuração do ambiente local.
+Este guia foi criado para orientar os desenvolvedores do grupo sobre os padrões de desenvolvimento adotados e as instruções de configuração do ambiente local.
 
 ---
 
@@ -14,7 +12,7 @@ Para manter a testabilidade, legibilidade e manutenibilidade do sistema, é fund
 Os controllers JavaFX devem lidar **exclusivamente** com tarefas de apresentação e controle de eventos gráficos.
 *   **O que deve ficar no Controller**:
     *   Leitura de dados de campos de texto, comboboxes e seleções gráficas.
-    *   Formatação e limpa de erros visuais básicos (ex.: colorir borda do campo se vazio).
+    *   Formatação e limpeza de erros visuais básicos (ex.: colorir borda do campo se vazio).
     *   Encaminhamento de chamadas para repositórios ou classes de serviço.
     *   Controle de fluxo de navegação entre telas (carregamento de FXMLs).
 *   **O que NÃO deve ficar no Controller (Regras de Negócio poluidoras)**:
@@ -95,7 +93,7 @@ Colar em:  <raiz-do-projeto-g5>\lib\
 ### Execução no Eclipse IDE
 1.  Importe o projeto na workspace: **File → Import → General → Existing Projects into Workspace**.
 2.  Selecione a pasta raiz do projeto e clique em **Finish**.
-3.  Clique com o botão direito na classe [Main.java](../../Main.java) e escolha **Run As → Run Configurations**.
+3.  Clique com o botão direito na classe [Main.java](../Main.java) e escolha **Run As → Run Configurations**.
 4.  Selecione a aba **Arguments** e, no campo **VM Arguments**, adicione o seguinte comando (ajustando o caminho para o seu JavaFX SDK local):
     ```bash
     --module-path "C:\caminho-para-seu-sdk\javafx-sdk-26\lib" --add-modules javafx.controls,javafx.fxml --enable-native-access=javafx.graphics

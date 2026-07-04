@@ -1,6 +1,6 @@
 # Arquitetura do Software - TradeLibrary
 
-Este documento descreve as decisões arquiteturais, o fluxo de dados, a estrutura de persistência local e os algoritmos para busca e filtragem do sistema **TradeLibrary**.
+Este documento descreve as decisões arquiteturais, o fluxo de dados, a estrutura de persistência local e os algoritmos de busca e filtragem do sistema **TradeLibrary**.
 
 ---
 
@@ -9,37 +9,37 @@ Este documento descreve as decisões arquiteturais, o fluxo de dados, a estrutur
 O sistema utiliza o padrão arquitetural **MVC (Model-View-Controller)** para garantir uma clara separação de responsabilidades. Isso facilita a manutenção, teste e evolução de cada parte do sistema de forma independente.
 
 ```
-       ┌────────────────────────┐
-       │          VIEW          │◄────────────────┐
-       │ (FXML / CSS / JavaFX)  │                 │
-       └───────────┬────────────┘                 │
-                   │                              │
-                   │ Interação do                 │ Atualização
-                   │ Usuário                      │ da UI
-                   ▼                              │
-       ┌────────────────────────┐                 │
-       │       CONTROLLER       │─────────────────┘
-       │    (Java Controllers)  │
-       └───────────┬────────────┘
-                   │
-                   │ Manipula /
-                   │ Consulta
-                   ▼
-       ┌────────────────────────┐
-       │         MODEL          │
-       │  (Entidades / DAOs /   │
-       │    ORMLite + SQLite)   │
-       └────────────────────────┘
+        ┌────────────────────────┐
+        │          VIEW          │◄────────────────┐
+        │ (FXML / CSS / JavaFX)  │                 │
+        └───────────┬────────────┘                 │
+                    │                              │
+                    │ Interação do                 │ Atualização
+                    │ Usuário                      │ da UI
+                    ▼                              │
+        ┌────────────────────────┐                 │
+        │       CONTROLLER       │─────────────────┘
+        │    (Java Controllers)  │
+        └───────────┬────────────┘
+                    │
+                    │ Manipula /
+                    │ Consulta
+                    ▼
+        ┌────────────────────────┐
+        │         MODEL          │
+        │  (Entidades / DAOs /   │
+        │    ORMLite + SQLite)   │
+        └────────────────────────┘
 ```
 
 ### Divisão de Pacotes no Projeto
 
 *   **`model`**: Contém o modelo de domínio do negócio, incluindo a lógica de acesso a dados (Repositories/DAOs) e a persistência local.
-    *   *Exemplos*: [Usuario.java](file:///c:/Users/crist/Downloads/g5-main%20(2)/g5-main/model/Usuario.java), [Anuncio.java](file:///c:/Users/crist/Downloads/g5-main%20(2)/g5-main/model/Anuncio.java), [Database.java](file:///c:/Users/crist/Downloads/g5-main%20(2)/g5-main/model/Database.java), [AnuncioRepository.java](file:///c:/Users/crist/Downloads/g5-main%20(2)/g5-main/model/AnuncioRepository.java).
+    *   *Exemplos*: [Usuario.java](../model/Usuario.java), [Anuncio.java](../model/Anuncio.java), [Database.java](../model/Database.java), [AnuncioRepository.java](../model/AnuncioRepository.java).
 *   **`view`**: Composto pelas telas declarativas em FXML e folhas de estilo CSS. Define a aparência visual da aplicação.
-    *   *Exemplos*: [CatalogView.fxml](file:///c:/Users/crist/Downloads/g5-main%20(2)/g5-main/view/CatalogView.fxml), [application.css](file:///c:/Users/crist/Downloads/g5-main%20(2)/g5-main/view/application.css).
+    *   *Exemplos*: [CatalogView.fxml](../view/CatalogView.fxml), [application.css](../view/application.css).
 *   **`controller`**: Camada intermediária que responde às interações na View, valida os dados de entrada, coordena a navegação e invoca os métodos de manipulação do Model.
-    *   *Exemplos*: [CatalogController.java](file:///c:/Users/crist/Downloads/g5-main%20(2)/g5-main/controller/CatalogController.java), [AddBookController.java](file:///c:/Users/crist/Downloads/g5-main%20(2)/g5-main/controller/AddBookController.java).
+    *   *Exemplos*: [CatalogController.java](../controller/CatalogController.java), [AddBookController.java](../controller/AddBookController.java).
 
 ---
 
@@ -47,13 +47,25 @@ O sistema utiliza o padrão arquitetural **MVC (Model-View-Controller)** para ga
 
 O fluxo típico de dados segue um ciclo bem definido, exemplificado abaixo pelo processo de cadastro de um novo livro:
 
-1.  **Entrada do Usuário (View)**: O usuário preenche os campos de título, autor e preço em [AddBookView.fxml](file:///c:/Users/crist/Downloads/g5-main%20(2)/g5-main/view/AddBookView.fxml) e clica no botão "Salvar".
-2.  **Captura e Validação (Controller)**: O [AddBookController](file:///c:/Users/crist/Downloads/g5-main%20(2)/g5-main/controller/AddBookController.java#L69-L115) intercepta o evento através do método `salvarAnuncio()`, lê os valores dos campos de texto, valida as entradas (como impedir preço nulo ou título vazio) e exibe feedbacks visuais de erro caso necessário.
+1.  **Entrada do Usuário (View)**: O usuário preenche os campos de título, autor e preço em [AddBookView.fxml](../view/AddBookView.fxml) e clica no botão "Salvar".
+2.  **Captura e Validação (Controller)**: O [AddBookController](../controller/AddBookController.java) intercepta o evento através do método `salvarAnuncio()`, lê os valores dos campos de texto, valida as entradas (como impedir preço nulo ou título vazio) e exibe feedbacks visuais de erro caso necessário.
 3.  **Encaminhamento ao Modelo (Model)**:
-    *   Se válido, o Controller cria instâncias de [Livro](file:///c:/Users/crist/Downloads/g5-main%20(2)/g5-main/model/Livro.java) e de uma subclasse de [Anuncio](file:///c:/Users/crist/Downloads/g5-main%20(2)/g5-main/model/Anuncio.java) (como [AnuncioVenda](file:///c:/Users/crist/Downloads/g5-main%20(2)/g5-main/model/AnuncioVenda.java)).
-    *   O Controller instancia o repositório correspondente ([AnuncioRepository](file:///c:/Users/crist/Downloads/g5-main%20(2)/g5-main/model/AnuncioRepository.java)) e chama o método de persistência (por exemplo, `cadastrarAnuncioVenda()`).
+    *   Se válido, o Controller cria instâncias de [Livro](../model/Livro.java) e de uma subclasse de [Anuncio](../model/Anuncio.java) (como [AnuncioVenda](../model/AnuncioVenda.java)).
+    *   O Controller instancia o repositório correspondente ([AnuncioRepository](../model/AnuncioRepository.java)) e chama o método de persistência (por exemplo, `cadastrarAnuncioVenda()`).
 4.  **Gravação em Banco**: O repositório usa o driver SQLite via ORMLite para registrar o objeto no arquivo de banco de dados `tradelibrary.db`.
-5.  **Atualização da View**: O Controller limpa os campos do formulário e emite mensagens de sucesso no log. Quando o usuário navega para a aba Catálogo, o [CatalogController](file:///c:/Users/crist/Downloads/g5-main%20(2)/g5-main/controller/CatalogController.java) é inicializado, consultando o repositório para carregar dinamicamente os novos cards na interface gráfica.
+5.  **Atualização da View**: O Controller limpa os campos do formulário e emite mensagens de sucesso. Quando o usuário navega para a aba Catálogo, o [CatalogController](../controller/CatalogController.java) é inicializado, consultando o repositório para carregar dinamicamente os novos cards na interface gráfica.
+
+### Fluxo para Compra de Livros (Carrinho)
+1.  **Carrinho (View)**: O usuário abre [CartView.fxml](../view/CartView.fxml) e clica em "Finalizar Compra".
+2.  **Processamento (Controller/Manager)**: O [CartController](../controller/CartController.java) delega para o [CartManager](../controller/CartManager.java).
+3.  **Transação e Exclusão (Model)**: O `CartManager` itera sobre os itens do carrinho, registra uma instância de [Transacao](../model/Transacao.java) via [TransacaoRepository](../model/TransacaoRepository.java), e remove o [Anuncio](../model/Anuncio.java) do catálogo via [AnuncioRepository](../model/AnuncioRepository.java). Em seguida, limpa os itens do banco de dados na tabela de carrinho por meio do [CartItemRepository](../model/CartItemRepository.java).
+
+### Fluxo para Troca de Livros (Propostas)
+1.  **Detalhes do Livro (View)**: O usuário visualiza um anúncio de troca em [BookDetailsView.fxml](../view/BookDetailsView.fxml) e clica em "Solicitar Troca".
+2.  **Solicitação (Controller/Manager)**: O [TradeManager](../controller/TradeManager.java) exibe uma caixa de diálogo para que o proponente digite o título do livro oferecido.
+3.  **Registro (Model)**: Uma nova [Proposta](../model/Proposta.java) com status `"PENDENTE"` é criada e salva através do [PropostaRepository](../model/PropostaRepository.java).
+4.  **Aceitação (Controller)**: O proprietário do livro visualiza a proposta pendente em [ProposalsView.fxml](../view/ProposalsView.fxml) (gerenciada por [ProposalsController](../controller/ProposalsController.java)) e clica em "Aceitar".
+5.  **Finalização (Model)**: O `ProposalsController` altera o status da proposta para `"ACEITA"`, rejeita as demais propostas concorrentes para o mesmo anúncio definindo-as como `"REJEITADA"`, registra a [Transacao](../model/Transacao.java) de troca, remove o anúncio do catálogo e fornece as informações de contato do proponente.
 
 ---
 
@@ -119,10 +131,63 @@ O banco de dados é um arquivo local denominado `tradelibrary.db` localizado na 
         // ...
     }
     ```
+*   **Tabela `itens_carrinho`**:
+    Mapeia os itens adicionados ao carrinho de compras de um usuário.
+    ```java
+    @DatabaseTable(tableName = "itens_carrinho")
+    public class CartItem {
+        @DatabaseField(generatedId = true, columnName = "id")
+        private int id;
+        @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "usuario_email", canBeNull = false)
+        private Usuario usuario;
+        @DatabaseField(columnName = "anuncio_id", canBeNull = false)
+        private int anuncioId;
+        @DatabaseField(columnName = "tipo_anuncio", canBeNull = false)
+        private String tipoAnuncio; // "VENDA" ou "TROCA"
+    }
+    ```
+*   **Tabela `propostas`**:
+    Mapeia propostas de escambo/troca recebidas pelos anunciantes.
+    ```java
+    @DatabaseTable(tableName = "propostas")
+    public class Proposta {
+        @DatabaseField(generatedId = true, columnName = "id")
+        private int id;
+        @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "anuncio_id", canBeNull = false)
+        private AnuncioTroca anuncio;
+        @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "proponente_email", canBeNull = false)
+        private Usuario proponente;
+        @DatabaseField(columnName = "livro_oferecido", canBeNull = false)
+        private String livroOferecido;
+        @DatabaseField(columnName = "status", canBeNull = false)
+        private String status = "PENDENTE"; // PENDENTE, ACEITA, REJEITADA
+    }
+    ```
+*   **Tabela `transacoes`**:
+    Armazena o histórico de todas as transações finalizadas na plataforma.
+    ```java
+    @DatabaseTable(tableName = "transacoes")
+    public class Transacao {
+        @DatabaseField(generatedId = true, columnName = "id")
+        private int id;
+        @DatabaseField(columnName = "tipo", canBeNull = false)
+        private String tipo; // "TROCA" ou "VENDA"
+        @DatabaseField(columnName = "livro_titulo", canBeNull = false)
+        private String livroTitulo;
+        @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "vendedor_email", canBeNull = false)
+        private Usuario vendedor;
+        @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "comprador_email", canBeNull = false)
+        private Usuario comprador;
+        @DatabaseField(columnName = "detalhes", canBeNull = false)
+        private String detalhes;
+        @DatabaseField(columnName = "data_transacao", canBeNull = false)
+        private String dataTransacao;
+    }
+    ```
 
 ### Classe de Conexão: `Database`
 
-A inicialização e conexão com o banco de dados são centralizadas na classe [Database.java](file:///c:/Users/crist/Downloads/g5-main%20(2)/g5-main/model/Database.java). Ela implementa o padrão Singleton para o objeto `ConnectionSource` e cria as tabelas automaticamente se estas não existirem na primeira execução do aplicativo:
+A inicialização e conexão com o banco de dados são centralizadas na classe [Database.java](../model/Database.java). Ela implementa o padrão Singleton para o objeto `ConnectionSource` e cria as tabelas automaticamente se estas não existirem na primeira execução do aplicativo:
 
 ```java
 public class Database {
@@ -138,10 +203,12 @@ public class Database {
             TableUtils.createTableIfNotExists(connectionSource, Livro.class);
             TableUtils.createTableIfNotExists(connectionSource, AnuncioVenda.class);
             TableUtils.createTableIfNotExists(connectionSource, AnuncioTroca.class);
+            TableUtils.createTableIfNotExists(connectionSource, CartItem.class);
+            TableUtils.createTableIfNotExists(connectionSource, Proposta.class);
+            TableUtils.createTableIfNotExists(connectionSource, Transacao.class);
         }
         return connectionSource;
     }
-    // ...
 }
 ```
 

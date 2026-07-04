@@ -1,0 +1,186 @@
+@startuml TradeLibrary Class Diagram
+
+skinparam class {
+    BackgroundColor White
+    ArrowColor #2D6A4F
+    BorderColor #2D6A4F
+}
+skinparam stereotypeCBackgroundColor #2D6A4F
+skinparam stereotypeCBorderColor White
+
+package model {
+    interface Publicavel {
+        + publicar(): void
+    }
+
+    abstract class Anuncio {
+        # id: int
+        # preco: double
+        # status: String
+        # livro: Livro
+        # vendedor: Usuario
+        # descricao: String
+        + Anuncio()
+        + getId(): int
+        + setId(id: int): void
+        + getLivro(): Livro
+        + setLivro(livro: Livro): void
+        + getVendedor(): Usuario
+        + setVendedor(vendedor: Usuario): void
+        + getPreco(): double
+        + setPreco(preco: double): void
+        + getDescricao(): String
+        + setDescricao(desc: String): void
+        + getStatus(): String
+        + setStatus(status: String): void
+        + {abstract} exibirResumo(): void
+        + {abstract} taxaPlataforma(): double
+        + {abstract} alterarStatus(): void
+    }
+
+    class AnuncioVenda {
+        + AnuncioVenda()
+        + AnuncioVenda(livro: Livro, vendedor: Usuario, preco: double, descricao: String)
+        + exibirResumo(): void
+        + taxaPlataforma(): double
+        + alterarStatus(): void
+        + publicar(): void
+    }
+
+    class AnuncioTroca {
+        - procura: String
+        + AnuncioTroca()
+        + AnuncioTroca(livro: Livro, vendedor: Usuario, procura: String, descricao: String)
+        + exibirResumo(): void
+        + taxaPlataforma(): double
+        + alterarStatus(): void
+        + publicar(): void
+        + getProcura(): String
+        + setProcura(procura: String): void
+    }
+
+    class Usuario {
+        - nome: String
+        - email: String
+        - fone: String
+        - senha: String
+        + Usuario()
+        + Usuario(nome: String, email: String, fone: String)
+        + Usuario(nome: String, email: String, fone: String, senha: String)
+        + getNome(): String
+        + getEmail(): String
+        + getFone(): String
+        + getSenha(): String
+        + setNome(nome: String): void
+        + setEmail(email: String): void
+        + setFone(fone: String): void
+        + setSenha(senha: String): void
+        + info(): String
+    }
+
+    class Livro {
+        - id: int
+        - titulo: String
+        - autor: String
+        - isbn: String
+        - estado: String
+        + Livro()
+        + Livro(titulo: String, autor: String, isbn: String, estado: String)
+        + getId(): int
+        + setId(id: int): void
+        + getTitulo(): String
+        + getAutor(): String
+        + getIsbn(): String
+        + getEstado(): String
+        + setTitulo(titulo: String): void
+        + setAutor(autor: String): void
+        + setIsbn(isbn: String): void
+        + setEstado(estado: String): void
+        + info(): String
+    }
+
+    class Proposta {
+        - id: int
+        - anuncio: AnuncioTroca
+        - proponente: Usuario
+        - livroOferecido: String
+        - status: String
+        + Proposta()
+        + Proposta(anuncio: AnuncioTroca, proponente: Usuario, livroOferecido: String)
+        + getId(): int
+        + setId(id: int): void
+        + getAnuncio(): AnuncioTroca
+        + setAnuncio(anuncio: AnuncioTroca): void
+        + getProponente(): Usuario
+        + setProponente(proponente: Usuario): void
+        + getLivroOferecido(): String
+        + setLivroOferecido(livro: String): void
+        + getStatus(): String
+        + setStatus(status: String): void
+    }
+
+    class Transacao {
+        - id: int
+        - tipo: String
+        - livroTitulo: String
+        - vendedor: Usuario
+        - comprador: Usuario
+        - detalhes: String
+        - dataTransacao: String
+        + Transacao()
+        + Transacao(tipo: String, livroTitulo: String, vendedor: Usuario, comprador: Usuario, detalhes: String, data: String)
+        + getId(): int
+        + setId(id: int): void
+        + getTipo(): String
+        + setTipo(tipo: String): void
+        + getLivroTitulo(): String
+        + setLivroTitulo(titulo: String): void
+        + getVendedor(): Usuario
+        + setVendedor(vendedor: Usuario): void
+        + getComprador(): Usuario
+        + setComprador(comprador: Usuario): void
+        + getDetalhes(): String
+        + setDetalhes(detalhes: String): void
+        + getDataTransacao(): String
+        + setDataTransacao(data: String): void
+    }
+
+    class CartItem {
+        - id: int
+        - usuario: Usuario
+        - anuncioId: int
+        - tipoAnuncio: String
+        + CartItem()
+        + CartItem(usuario: Usuario, anuncioId: int, tipoAnuncio: String)
+        + getId(): int
+        + setId(id: int): void
+        + getUsuario(): Usuario
+        + setUsuario(u: Usuario): void
+        + getAnuncioId(): int
+        + setAnuncioId(id: int): void
+        + getTipoAnuncio(): String
+        + setTipoAnuncio(tipo: String): void
+    }
+
+    class Database {
+        - {static} DB_URL: String = "jdbc:sqlite:tradelibrary.db"
+        - {static} connectionSource: ConnectionSource
+        + {static} getConnectionSource(): ConnectionSource
+        + {static} close(): void
+    }
+}
+
+Publicavel <|.. AnuncioVenda
+Publicavel <|.. AnuncioTroca
+Anuncio <|-- AnuncioVenda
+Anuncio <|-- AnuncioTroca
+
+Anuncio "0..*" o-- "1" Livro : descreve
+Anuncio "0..*" o-- "1" Usuario : publicado_por
+Proposta "0..*" o-- "1" AnuncioTroca : proposta_para
+Proposta "0..*" o-- "1" Usuario : proponente
+Transacao "0..*" o-- "1" Usuario : vendedor
+Transacao "0..*" o-- "1" Usuario : comprador
+CartItem "0..*" o-- "1" Usuario : pertence_a
+
+@enduml

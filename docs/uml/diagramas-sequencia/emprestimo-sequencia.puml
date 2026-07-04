@@ -1,0 +1,70 @@
+@startuml Emprestimo/Troca de Livro - Sequencia
+
+skinparam BoxPadding 10
+skinparam ParticipantPadding 10
+skinparam ParticipantBorderColor #2D6A4F
+skinparam ParticipantBackgroundColor White
+skinparam ActorBorderColor #2D6A4F
+skinparam ActorBackgroundColor White
+skinparam ArrowColor #2D6A4F
+
+actor "Proponente" as UserA
+participant "BookDetailsController" as BDC
+participant "TradeManager" as TM
+participant "PropostaRepository" as PR
+database "Database (SQLite)" as DB
+actor "Anunciante" as UserB
+participant "ProposalsController" as PC
+participant "TransacaoRepository" as TR
+participant "AnuncioRepository" as AR
+
+== Fase 1: Propor a Troca ==
+UserA -> BDC : Clique "Solicitar Troca"
+BDC -> TM : proporTroca(anuncio)
+activate TM
+TM -> UserA : Exibe Diálogo (Solicita livro em troca)
+UserA --> TM : Insere título do livro ("Livro Oferecido")
+TM -> PR : salvar(Proposta)
+activate PR
+PR -> DB : create(proposta)
+DB --> PR : OK
+PR --> TM : true
+deactivate PR
+TM -> UserA : Exibe Sucesso ("Proposta Enviada")
+deactivate TM
+
+== Fase 2: Avaliar e Aceitar a Troca ==
+UserB -> PC : Abre tela de Propostas
+activate PC
+PC -> PR : buscarRecebidasPorUsuario(usuarioLogado)
+activate PR
+PR -> DB : query propostas PENDENTES
+DB --> PR : Lista de Propostas
+PR --> PC : Lista de Propostas
+deactivate PR
+PC -> UserB : Exibe lista de propostas
+UserB -> PC : Clique "Aceitar"
+PC -> PR : atualizarStatus(proposta, "ACEITA")
+activate PR
+PR -> DB : update(proposta)
+deactivate PR
+
+PC -> PR : rejeitarOutrasParaAnuncio(anuncio, proposta)
+activate PR
+PR -> DB : query e update outras propostas para REJEITADA
+deactivate PR
+
+PC -> TR : registrar(Transacao)
+activate TR
+TR -> DB : create(transacao)
+deactivate TR
+
+PC -> AR : removerAnuncio(anuncio)
+activate AR
+AR -> DB : delete(anuncio)
+deactivate AR
+
+PC -> UserB : Exibe detalhes de contato do Proponente (Telefone, E-mail)
+deactivate PC
+
+@enduml

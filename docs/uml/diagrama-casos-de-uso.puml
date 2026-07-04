@@ -1,0 +1,53 @@
+@startuml TradeLibrary Use Case Diagram
+
+left to right direction
+skinparam packageStyle rectangle
+skinparam actor {
+    BackgroundColor White
+    BorderColor #2D6A4F
+}
+skinparam usecase {
+    BackgroundColor White
+    BorderColor #2D6A4F
+    ArrowColor #2D6A4F
+}
+
+actor "Usuário Visitante" as visitor
+actor "Usuário Autenticado" as authUser
+
+visitor <|-- authUser
+
+rectangle TradeLibrary {
+    usecase "Cadastrar-se" as UC_Register
+    usecase "Fazer Login" as UC_Login
+    
+    usecase "Visualizar Catálogo" as UC_ViewCatalog
+    usecase "Cadastrar Livro para Venda" as UC_AddSale
+    usecase "Cadastrar Livro para Troca" as UC_AddTrade
+    
+    usecase "Adicionar Livro ao Carrinho" as UC_AddToCart
+    usecase "Remover Livro do Carrinho" as UC_RemoveFromCart
+    usecase "Finalizar Compra (Venda)" as UC_Checkout
+    
+    usecase "Propor Troca de Livro" as UC_ProposeTrade
+    usecase "Gerenciar Propostas de Troca" as UC_ManageProposals
+    usecase "Aceitar Proposta de Troca" as UC_AcceptProposal
+    usecase "Rejeitar Proposta de Troca" as UC_RejectProposal
+}
+
+visitor --> UC_Register
+visitor --> UC_Login
+
+authUser --> UC_ViewCatalog
+authUser --> UC_AddSale
+authUser --> UC_AddTrade
+authUser --> UC_AddToCart
+authUser --> UC_RemoveFromCart
+authUser --> UC_Checkout
+authUser --> UC_ProposeTrade
+authUser --> UC_ManageProposals
+
+UC_ManageProposals <.. UC_AcceptProposal : <<extend>>
+UC_ManageProposals <.. UC_RejectProposal : <<extend>>
+
+@enduml

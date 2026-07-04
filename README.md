@@ -124,18 +124,51 @@ Abaixo está a representação estrutural do domínio principal do TradeLibrary,
 
 
 
+## 🔄 Melhorias Realizadas desde a Primeira Entrega
 
-
-![Diagrama de Classes](https://img.plantuml.biz/plantuml/png/pLHDImCn4BtdLmnwgTGMlPOYxL7m85QzpsPJ2MOpPPAKuiT_DvlzJAdeHV2qvCtCc_TcCravZ-n3POHxrNQ7Z1L8WywjlMTT1Azk9TcDVbDm9OIsNl4MfOBxK1WjSQyCl0k0AUmQW2SNi80zwL9y2e65yupIDvImji5AJQdY77Qi9CNaacAfIb0KuuEBs2Osjoy9AvMJ79bf34z17NIX-K6vKD7GiuvuFE2zGOzRuWfJh6yn1JJH0l8cTSh4PXgVbIsnjJQ69aRlcHPmLtykOHynLH8luCa5P1sXPAjhUJd8xzHV_8NyR_z0PkgHIJQcPb4coS2O3tMSznkdYQ9Z-2TUMtcjJKkL6dkSWQfGcnpQabNv85gIILq--4kbmx4kovrgksqSjbIzg3J4LfBNFXZA5M3mn3caNM6FbCVrA8_M815F6if1MQ8RZZNLo4MY-L5ujwndrsT0irdwThDTm8wS2xg_5N1pCh-ntMUd6nLJ-zpbHqmShzV9IBgEGeoUdEN7V9xNVHDiIrSn9xvnNm00)
-
+1.  **Mecanismo de Carrinho de Compras**: Adicionada a possibilidade de comprar múltiplos livros à venda em lote.
+2.  **Mecanismo de Propostas**: Fluxo completo de proposta e aceitação de trocas em tempo real, integrando a lógica de negócio de aceitar/rejeitar propostas concorrentes automaticamente.
+3.  **Persistência Integrada**: Inclusão de tabelas adicionais para carrinho, propostas e histórico de transações finalizadas no SQLite.
+4.  **Correção e Entrega do UML**: Criação de diagramas de classes, casos de uso e diagramas de sequência com arquivos-fonte do PlantUML (`.puml`) e exportações de imagem integradas localmente na documentação.
+5.  **Padronização Geral de Diretórios**: Reorganização estrutural para a pasta `/docs/` e remoção completa de referências a caminhos locais absolutos dos desenvolvedores em toda a documentação.
 
 ---
 
+## 🎨 Diagramas UML do Projeto
 
-## 🔄 Fluxo de Caso de Uso: Troca de Livros
+### Diagrama de Classes
+Mapeamento estrutural de todo o domínio de dados, repositórios de dados e relacionamentos de persistência.
 
-Este diagrama representa o fluxo principal de um usuário utilizando o sistema para cadastrar um interesse de troca.
+![Diagrama de Classes](./docs/uml/diagrama-classes.png)
 
-<p align="center">
-  <img src="resources/images/casosdeuso.png" alt="Fluxo de troca" width="720" />
-</p>
+---
+
+### Diagrama de Casos de Uso
+Casos de uso suportados pela aplicação por usuários visitantes e usuários autenticados.
+
+![Diagrama de Casos de Uso](./docs/uml/diagrama-casos-de-uso.png)
+
+---
+
+### Diagrama de Sequência: Fluxo de Troca (Escambo)
+Representação da sequência de chamadas de métodos para o envio e a aceitação de uma proposta de troca.
+
+![Diagrama de Sequência - Troca](./docs/uml/diagramas-sequencia/emprestimo-sequencia.png)
+
+---
+
+### Diagrama de Sequência: Fluxo de Venda/Compra
+Representação da sequência de chamadas para o checkout de livros adicionados ao carrinho de compras.
+
+![Diagrama de Sequência - Compra](./docs/uml/diagramas-sequencia/compra-sequencia.png)
+
+---
+
+## 👥 Membros da Equipe
+
+*   **Bruno Barreto** (Engenheiro de Backend)
+*   **Cristiano Ribeiro** (Arquiteto de Software e UML)
+*   **Dermival** (Engenheiro de Frontend)
+*   **Gabriel Bueno** (Líder da Equipe e Engenheiro de Segurança)
+*   **Guilherme William** (Engenheiro de Frontend)
+
