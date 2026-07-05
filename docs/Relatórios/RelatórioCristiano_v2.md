@@ -87,3 +87,7 @@ Além das atividades de arquitetura e documentação, prestei suporte à equipe 
 - Atualizar as regras de negócio conforme a definição da logística de entrega dos livros.
 - Documentar as práticas de segurança, incluindo criptografia de senhas.
 - Ampliar a padronização de JavaDoc no projeto.
+
+
+## Vídeo de Apresentação:
+https://drive.google.com/file/d/1R2alUw2cRjDqvjDbs7KvDMR3yz2uGI4Y/view?usp=drive_link
